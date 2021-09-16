@@ -1,0 +1,46 @@
+<script lang="ts">
+	import Countdown from '$components/Countdown/Countdown.svelte';
+	import Status from '$components/Status/Status.svelte';
+	import countdown from '$stores/countdown';
+
+	let isFinished: boolean = false;
+
+	$: timeMS = $countdown ? +$countdown : null;
+</script>
+
+<article>
+	{#if timeMS}
+		<aside class:finished={isFinished}>
+			<Countdown {timeMS} bind:isFinished />
+		</aside>
+	{/if}
+	<section>
+		<Status chars="standby" />
+	</section>
+</article>
+
+<style>
+	article {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+	}
+
+	aside {
+		transition: opacity 1.5s 0.25s, transform 2s ease-in-out;
+	}
+
+	.finished {
+		opacity: 0;
+		transform: scale(0.75);
+	}
+
+	section {
+		transition: transform 2s 0.5s ease-in-out;
+	}
+
+	.finished ~ section {
+		transform: translate(0, -50%);
+	}
+</style>
