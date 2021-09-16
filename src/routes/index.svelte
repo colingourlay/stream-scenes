@@ -1,19 +1,13 @@
-<script lang="ts">
-	import CountdownPicker from '$components/Countdown/CountdownPicker.svelte';
-</script>
-
 <article>
-	<h2>Countdown</h2>
-	<CountdownPicker />
+	<ul>
+		<li><a href="/controls">Controls</a></li>
+		<li><a href="/offline">Offline</a></li>
+		<li><a href="/standby">Standby (+ Countdown)</a></li>
+	</ul>
 </article>
 
 <style>
-	article {
-		width: 100%;
-		max-width: 20rem;
-	}
-
-	h2 {
-		text-align: center;
+	li {
+		font-size: 2rem;
 	}
 </style>
