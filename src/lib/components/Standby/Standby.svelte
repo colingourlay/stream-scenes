@@ -4,14 +4,12 @@
 	import countdown from '$stores/countdown';
 
 	let isFinished: boolean = false;
-
-	$: timeMS = $countdown ? +$countdown : null;
 </script>
 
 <article>
-	{#if timeMS}
+	{#if $countdown}
 		<aside class:finished={isFinished}>
-			<Countdown {timeMS} bind:isFinished />
+			<Countdown timeMS={$countdown} bind:isFinished />
 		</aside>
 	{/if}
 	<section>

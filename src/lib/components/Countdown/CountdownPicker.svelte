@@ -10,26 +10,25 @@
 	const getNextMilestone = (milestonePeriodMS: number) =>
 		Math.ceil(Date.now() / milestonePeriodMS) * milestonePeriodMS;
 	const getMinutesIntoFuture = (minutes: number) => Date.now() + minutes * 6e4;
-	const setCountdown = (value: number | null) => countdown.set(value === null ? '' : String(value));
 </script>
 
 <menu>
 	<ul>
-		<li><button on:click={() => setCountdown(null)}>None</button></li>
+		<li><button on:click={() => countdown.set(null)}>None</button></li>
 		<li>
-			<button on:click={() => setCountdown(getNextMilestone(MILESTONES.hour))}>Next Hour</button>
+			<button on:click={() => countdown.set(getNextMilestone(MILESTONES.hour))}>Next Hour</button>
 		</li>
 		<li>
-			<button on:click={() => setCountdown(getNextMilestone(MILESTONES.half))}>Next ½-hour</button>
+			<button on:click={() => countdown.set(getNextMilestone(MILESTONES.half))}>Next ½-hour</button>
 		</li>
 		<li>
-			<button on:click={() => setCountdown(getNextMilestone(MILESTONES.quarter))}
+			<button on:click={() => countdown.set(getNextMilestone(MILESTONES.quarter))}
 				>Next ¼-hour</button
 			>
 		</li>
 		{#each FUTURE_MINUTES_OPTIONS as minutes}
 			<li>
-				<button on:click={() => setCountdown(getMinutesIntoFuture(minutes))}
+				<button on:click={() => countdown.set(getMinutesIntoFuture(minutes))}
 					>{`${minutes} Minute${minutes === 1 ? '' : 's'}`}</button
 				>
 			</li>

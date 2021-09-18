@@ -3,13 +3,11 @@
 	import countdown from '$stores/countdown';
 
 	let isFinished: boolean = false;
-
-	$: timeMS = $countdown ? +$countdown : null;
 </script>
 
 <article class:finished={isFinished}>
-	{#if timeMS}
-		<Countdown {timeMS} bind:isFinished />
+	{#if $countdown}
+		<Countdown timeMS={$countdown} bind:isFinished />
 	{/if}
 </article>
 
