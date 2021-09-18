@@ -1,12 +1,13 @@
 <script lang="ts">
 	import countdown from '$stores/countdown';
 
+	export let minutes: number[] = [];
+
 	const MILESTONES = {
 		hour: 36e5,
 		half: 18e5,
 		quarter: 9e5
 	};
-	const FUTURE_MINUTES_OPTIONS = [1, 3, 5, 10, 15];
 	const getNextMilestone = (milestonePeriodMS: number) =>
 		Math.ceil(Date.now() / milestonePeriodMS) * milestonePeriodMS;
 	const getMinutesIntoFuture = (minutes: number) => Date.now() + minutes * 6e4;
@@ -26,10 +27,10 @@
 				>Next ¼-hour</button
 			>
 		</li>
-		{#each FUTURE_MINUTES_OPTIONS as minutes}
+		{#each minutes as value}
 			<li>
-				<button on:click={() => countdown.set(getMinutesIntoFuture(minutes))}
-					>{`${minutes} Minute${minutes === 1 ? '' : 's'}`}</button
+				<button on:click={() => countdown.set(getMinutesIntoFuture(value))}
+					>{`${value} Minute${value === 1 ? '' : 's'}`}</button
 				>
 			</li>
 		{/each}

@@ -4,7 +4,7 @@
 
 <article>
 	<h2>Countdown</h2>
-	<CountdownPicker />
+	<CountdownPicker minutes={[1]} />
 </article>
 
 <style>
