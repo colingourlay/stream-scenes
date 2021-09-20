@@ -5,7 +5,7 @@
 
 <article>
 	<h2>Countdown</h2>
-	<CountdownPicker minutes={[1]]} />
+	<CountdownPicker minutes={[1]} />
 	<!-- <CountdownPicker minutes={[1, 3, 5, 10, 15]} /> -->
 	<h2>Transcript</h2>
 	<TranscriptRecorder />
