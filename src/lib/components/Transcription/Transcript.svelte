@@ -2,10 +2,14 @@
 	import { browser } from '$app/env';
 	import { createWebSocket } from './constants';
 
+	export let numVisibleLines: number = 2;
+	export let showInterimLine: boolean = false;
+
 	let recentLines: string[] = [];
 	let interimLine: string | null = null;
-
 	let socket: WebSocket;
+
+	$: visibleRecentLines = showInterimLine && interimLine ? recentLines.slice(-1) : recentLines;
 
 	if (browser) {
 		socket = createWebSocket();
@@ -19,11 +23,13 @@
 
 			switch (type) {
 				case 'line':
-					recentLines = [...recentLines, payload].slice(-10);
+					recentLines = [...recentLines, payload].slice(-numVisibleLines);
 					interimLine = null;
 					break;
 				case 'interimLine':
-					interimLine = payload;
+					if (showInterimLine) {
+						interimLine = payload;
+					}
 					break;
 				case 'reset':
 					recentLines = [];
@@ -37,13 +43,29 @@
 </script>
 
 <article>
-	{#each recentLines as line}
-		<p><span>{line}</span></p>
-	{:else}
-		<p class="empty"><em>[…]</em></p>
+	<svg width="0" height="0">
+		<defs>
+			<filter id="outliner">
+				<feMorphology in="SourceAlpha" result="DILATED" operator="dilate" radius="5" />
+				<feFlood
+					flood-color="var(--color-text-outline, var(--color-background, transparent))"
+					flood-opacity="1"
+					result="OUTLINE_COLOUR"
+				/>
+				<feComposite in="OUTLINE_COLOUR" in2="DILATED" operator="in" result="OUTLINE" />
+
+				<feMerge>
+					<feMergeNode in="OUTLINE" />
+					<feMergeNode in="SourceGraphic" />
+				</feMerge>
+			</filter>
+		</defs>
+	</svg>
+	{#each visibleRecentLines as line}
+		<p>{line}</p>
 	{/each}
-	{#if interimLine}
-		<p><em>{interimLine}</em></p>
+	{#if showInterimLine && interimLine}
+		<p class="interim">{interimLine}</p>
 	{/if}
 </article>
 
@@ -56,22 +78,27 @@
 		flex-direction: column;
 		justify-content: flex-end;
 		-webkit-mask-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 15%);
+		mask-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 15%);
 	}
 
 	p {
-		margin: 1vw 0 0;
-		font-size: 5vw;
-	}
-
-	.empty:not(:last-child) {
-		display: none;
-	}
-
-	p > * {
-		display: inline-block;
+		margin: 0;
 		padding: 0.5vw 1vw;
-		background-color: var(--color-highlight, var(--color-background));
+		font-size: 5vw;
 		line-height: 1.33;
 		letter-spacing: 0.1ch;
+		filter: url(#outliner);
+	}
+
+	.interim {
+		font-style: italic;
+	}
+
+	p::first-letter {
+		text-transform: capitalize;
+	}
+
+	p::after {
+		content: '.';
 	}
 </style>
