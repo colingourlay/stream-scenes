@@ -19,7 +19,7 @@
 
 			switch (type) {
 				case 'line':
-					recentLines = [...recentLines, payload].slice(-5);
+					recentLines = [...recentLines, payload].slice(-10);
 					interimLine = null;
 					break;
 				case 'interimLine':
@@ -55,6 +55,7 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
+		-webkit-mask-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 15%);
 	}
 
 	p {
