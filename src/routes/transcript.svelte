@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Transcript from '$components/Transcript/Transcript.svelte';
+	import Transcript from '$components/Transcription/Transcript.svelte';
 </script>
 
 <Transcript />

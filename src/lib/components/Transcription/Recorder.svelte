@@ -8,21 +8,21 @@
 
 <script lang="ts">
 	import { browser } from '$app/env';
-	import transcript from '$stores/transcript';
+	import { createWebSocket } from './constants';
 
+	let socket: WebSocket;
 	let recognition;
 	let lastError: string | null = null;
 
 	if (browser && 'webkitSpeechRecognition' in window) {
+		socket = createWebSocket();
+
 		recognition = new window.webkitSpeechRecognition();
 		recognition.continuous = true;
 		recognition.interimResults = true;
 		recognition.onstart = () => (lastError = null);
 		recognition.onerror = ({ error }) => (lastError = error);
-		recognition.onend = () => {
-			console.log({ lastError });
-			lastError !== 'aborted' && recognition.start();
-		};
+		recognition.onend = () => lastError !== 'aborted' && recognition.start();
 		recognition.onresult = ({ results, resultIndex }) => {
 			if (typeof results === 'undefined') {
 				return;
@@ -30,13 +30,19 @@
 
 			const result: SpeechRecognitionResult = results[resultIndex];
 
-			transcript[result.isFinal ? 'addLine' : 'updateInterimLine'](result[0].transcript);
+			socket.send(
+				JSON.stringify({
+					msg: true,
+					type: result.isFinal ? 'line' : 'interimLine',
+					payload: result[0].transcript
+				})
+			);
 		};
 	}
 
 	const start = () => recognition && recognition.start();
 	const stop = () => recognition && recognition.abort();
-	const reset = () => transcript.reset();
+	const reset = () => socket.send(JSON.stringify({ msg: true, type: 'reset' }));
 </script>
 
 {#if recognition}
