@@ -1,62 +1,80 @@
 <script lang="ts">
+	type Particle = {
+		distance: number;
+		sizeVmin: number;
+		color: string;
+		topPct: number;
+		leftPct: number;
+		animationDurationSeconds: number;
+		animationDelaySeconds: number;
+		transformOriginXVh: number;
+		transformOriginYVh: number;
+	};
+
 	const COLORS = [
 		'hsl(270deg 40% 55%)',
 		'hsl(270deg 45% 50%)',
 		'hsl(270deg 55% 45%)',
 		'hsl(270deg 60% 35%)'
 	];
-	const ANIMATION_DURATION_S = 6;
-	const PARTICLE_SIZE_VMIN = 20;
-	const NUM_PARTICLES = 15;
+	const NUM_PARTICLES = 32;
 
-	const particles = Array.from({ length: NUM_PARTICLES }, (_, index) => ({
-		color: COLORS[index % COLORS.length],
-		top: `${Math.floor(Math.random() * 100)}%`,
-		left: `${Math.floor(Math.random() * 100)}%`,
-		animationDuration: `${Math.floor(Math.random() * ANIMATION_DURATION_S) + 10}s`,
-		animationDelay: `${Math.floor(Math.random() * -(10 + ANIMATION_DURATION_S))}s`,
-		transformOrigin: `${Math.floor(Math.random() * 50) - 25}vh ${
-			Math.floor(Math.random() * 50) - 25
-		}vh`,
-		boxShadow: `${PARTICLE_SIZE_VMIN * 2 * (Math.random() > 0.5 ? -1 : 1)}vmin 0 ${Math.floor(
-			(Math.random() + 0.5) * PARTICLE_SIZE_VMIN * 0.5
-		)}vmin currentColor`
-	}));
+	const particles: Particle[] = Array.from({ length: NUM_PARTICLES }, (_, index) => {
+		const distance = Math.max(0.2, Math.random());
+		const animationDurationSeconds = Math.floor(8 + 8 / distance);
+
+		return {
+			distance,
+			sizeVmin: distance * 4,
+			color: COLORS[index % COLORS.length],
+			topPct: Math.floor(Math.random() * 100),
+			leftPct: Math.floor(Math.random() * 100),
+			animationDurationSeconds,
+			animationDelaySeconds: Math.floor(Math.random() * -animationDurationSeconds),
+			transformOriginXVh: Math.floor(Math.random() * 50) - 25,
+			transformOriginYVh: Math.floor(Math.random() * 50) - 25
+		};
+	});
+
+	particles.sort((a, b) => a.sizeVmin - b.sizeVmin);
+	console.log(particles);
 </script>
 
 <div>
 	{#each particles as particle}
 		<span
 			style={`
-        color: ${particle.color};
-        top: ${particle.top};
-        left: ${particle.left};
-        animation-duration: ${particle.animationDuration};
-        animation-delay: ${particle.animationDelay};
-        transform-origin: ${particle.transformOrigin};
-        box-shadow: ${particle.boxShadow};
+        --size: ${particle.sizeVmin}vmin;
+        --color: ${particle.color};
+        top: ${particle.topPct}%;
+        left: ${particle.leftPct}%;
+        animation-duration: ${particle.animationDurationSeconds}s;
+        animation-delay: ${particle.animationDelaySeconds}s;
+        transform-origin: ${particle.transformOriginXVh}vh ${particle.transformOriginYVh}vh;
     `}
 		/>
 	{/each}
 </div>
 
 <style>
+	div {
+		width: 100%;
+		height: 100%;
+	}
+
 	@keyframes move {
 		100% {
 			transform: rotate(360deg);
 		}
 	}
 
-	div {
-		width: 100%;
-		height: 100%;
-	}
-
 	span {
 		position: absolute;
 		border-radius: 50%;
-		width: 20vmin;
-		height: 20vmin;
+		width: var(--size);
+		height: var(--size);
+		background-color: var(--color);
+		filter: blur(calc(var(--size) / 2)) drop-shadow(0 0 calc(var(--size) * 2) var(--color));
 		backface-visibility: hidden;
 		animation-name: move;
 		animation-timing-function: linear;
