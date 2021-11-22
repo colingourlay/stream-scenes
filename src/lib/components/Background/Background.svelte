@@ -12,10 +12,10 @@
 	};
 
 	const COLORS = [
-		'hsl(270deg 40% 55%)',
-		'hsl(270deg 45% 50%)',
-		'hsl(270deg 55% 45%)',
-		'hsl(270deg 60% 35%)'
+		'hsl(var(--theme-hue-primary, 225) 40% 55%)',
+		'hsl(var(--theme-hue-primary, 225) 45% 50%)',
+		'hsl(var(--theme-hue-primary, 225) 55% 45%)',
+		'hsl(var(--theme-hue-primary, 225) 60% 35%)'
 	];
 	const NUM_PARTICLES = 32;
 
@@ -37,7 +37,6 @@
 	});
 
 	particles.sort((a, b) => a.sizeVmin - b.sizeVmin);
-	console.log(particles);
 </script>
 
 <div>
