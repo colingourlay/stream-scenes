@@ -12,10 +12,10 @@
 	};
 
 	const COLORS = [
-		'hsl(var(--theme-hue-primary, 225) 40% 55%)',
-		'hsl(var(--theme-hue-primary, 225) 45% 50%)',
-		'hsl(var(--theme-hue-primary, 225) 55% 45%)',
-		'hsl(var(--theme-hue-primary, 225) 60% 35%)'
+		'hsl(var(--hue-primary) 40% 55%)',
+		'hsl(var(--hue-primary) 45% 50%)',
+		'hsl(var(--hue-primary) 55% 45%)',
+		'hsl(var(--hue-primary) 60% 35%)'
 	];
 	const NUM_PARTICLES = 32;
 
@@ -56,9 +56,8 @@
 </div>
 
 <style>
-	div {
-		width: 100%;
-		height: 100%;
+	:global(html) {
+		background-color: var(--color-primary);
 	}
 
 	@keyframes move {
