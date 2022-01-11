@@ -57,7 +57,13 @@
 
 <style>
 	:global(html) {
-		background-color: var(--color-primary);
+		--color-primary-shadow: hsl(var(--hue-primary) var(--saturation-primary) 20%);
+		background-image: radial-gradient(
+			circle at 50% 75%,
+			var(--color-primary-shadow) 25%,
+			var(--color-primary)
+		);
+		background-size: 100%;
 	}
 
 	@keyframes move {
