@@ -1,11 +1,17 @@
 <script lang="ts">
-	import { browser } from '$app/env';
+	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import Skin from '$components/Skin/Skin.svelte';
-	import { getThemeFromURLSearchParams } from '$utils/theme';
+	import Skin from '$lib/components/Skin/Skin.svelte';
+	import { getThemeFromSearchParams } from '$lib/utils/theme';
+	import '../app.css';
 
-	$: scheme = browser ? $page.query.get('scheme') : undefined;
-	$: theme = browser ? getThemeFromURLSearchParams($page.query) : undefined;
+	let scheme: string;
+	let theme: Record<string, string>;
+
+	onMount(() => {
+		scheme = $page.url.searchParams.get('scheme');
+		theme = getThemeFromSearchParams($page.url.searchParams);
+	});
 </script>
 
 <Skin {scheme} {theme}>

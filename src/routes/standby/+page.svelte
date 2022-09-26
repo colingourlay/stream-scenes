@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Standby from '$components/Standby/Standby.svelte';
+	import Standby from '$lib/components/Standby/Standby.svelte';
 </script>
 
 <Standby />

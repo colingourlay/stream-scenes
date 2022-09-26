@@ -4,13 +4,14 @@
 
 	export let aspect: number | undefined = undefined;
 	export let isFlipped = false;
+	export let isSecondary = false;
 	export let isFrameSecondary = false;
 	export let isSidebarSecondary = false;
 </script>
 
 <main class:isFlipped>
-	<article><Frame {aspect} isSecondary={isFrameSecondary} /></article>
-	<aside><Backdrop isSecondary={isSidebarSecondary} /></aside>
+	<article><Frame {aspect} isSecondary={isFrameSecondary || isSecondary} /></article>
+	<aside><Backdrop isSecondary={isSidebarSecondary || isSecondary} /></aside>
 </main>
 
 <style>

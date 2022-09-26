@@ -1,5 +1,5 @@
-export const getThemeFromURLSearchParams = (params: URLSearchParams): Record<string, string> =>
-	[...params.entries()].reduce((memo, [key, value]) => {
+export const getThemeFromSearchParams = (searchParams: URLSearchParams): Record<string, string> =>
+	[...searchParams.entries()].reduce((memo, [key, value]) => {
 		if (key.indexOf('theme-') === 0) {
 			memo[key.slice(6)] = value;
 		}

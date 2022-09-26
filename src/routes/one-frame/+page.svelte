@@ -1,9 +1,15 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import OneFrame from '$components/OneFrame/OneFrame.svelte';
+	import OneFrame from '$lib/components/OneFrame/OneFrame.svelte';
+
+	let aspect: number;
+	let isSecondary: boolean;
+
+	onMount(() => {
+		aspect = +$page.url.searchParams.get('aspect') || undefined;
+		isSecondary = $page.url.searchParams.has('secondary') || undefined;
+	});
 </script>
 
-<OneFrame
-	aspect={+$page.query.get('aspect') || undefined}
-	isSecondary={$page.query.has('secondary') || undefined}
-/>
+<OneFrame {aspect} {isSecondary} />

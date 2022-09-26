@@ -1,5 +1,5 @@
 <script lang="ts">
-	import countdown from '$stores/countdown';
+	import countdown from '$lib/stores/countdown';
 
 	export let minutes: number[] = [];
 

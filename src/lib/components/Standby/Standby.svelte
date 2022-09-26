@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Countdown from '$components/Countdown/Countdown.svelte';
-	import Status from '$components/Status/Status.svelte';
-	import countdown from '$stores/countdown';
+	import Countdown from '$lib/components/Countdown/Countdown.svelte';
+	import Status from '$lib/components/Status/Status.svelte';
+	import countdown from '$lib/stores/countdown';
 
 	let isFinished: boolean = false;
 </script>

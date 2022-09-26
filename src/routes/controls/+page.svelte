@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Backdrop from '$components/Backdrop/Backdrop.svelte';
-	import CountdownPicker from '$components/Countdown/CountdownPicker.svelte';
+	import Backdrop from '$lib/components/Backdrop/Backdrop.svelte';
+	import CountdownPicker from '$lib/components/Countdown/CountdownPicker.svelte';
 </script>
 
 <Backdrop>

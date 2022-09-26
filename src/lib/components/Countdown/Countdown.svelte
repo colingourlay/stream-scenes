@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { hoursMinutesSeconds } from '$utils/time';
+	import { hoursMinutesSeconds } from '$lib/utils/time';
 
 	export let timeMS: number;
 	export let isFinished: boolean = false;

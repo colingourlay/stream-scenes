@@ -7,7 +7,7 @@
 </script>
 
 <script lang="ts">
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 	import { createWebSocket } from './constants';
 
 	let socket: WebSocket;
