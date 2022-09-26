@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Recorder from '$lib/components/Transcription/Recorder.svelte';
+	import Recorder from '$components/Transcription/Recorder.svelte';
 </script>
 
 <article>

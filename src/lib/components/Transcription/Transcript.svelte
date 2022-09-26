@@ -48,7 +48,7 @@
 			<filter id="outliner">
 				<feMorphology in="SourceAlpha" result="DILATED" operator="dilate" radius="5" />
 				<feFlood
-					flood-color="var(--color-text-outline, var(--color-background, transparent))"
+					flood-color="var(--theme-color-text-outline, hsla(0 0% 0% / 0))"
 					flood-opacity="1"
 					result="OUTLINE_COLOUR"
 				/>
@@ -71,12 +71,7 @@
 
 <style>
 	article {
-		width: 100vw;
-		height: 100vh;
-		overflow: hidden;
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-end;
+		justify-self: flex-end;
 		-webkit-mask-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 15%);
 		mask-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 15%);
 	}

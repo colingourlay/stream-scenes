@@ -2,6 +2,12 @@
 	import Status from '$components/Status/Status.svelte';
 </script>
 
-<article>
+<main>
 	<Status chars="offline" />
-</article>
+</main>
+
+<style>
+	main {
+		margin: auto;
+	}
+</style>
