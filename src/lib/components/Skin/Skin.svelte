@@ -88,4 +88,24 @@
 	:global(a):is(:link, :visited) {
 		color: var(--color-text);
 	}
+
+	:global(button) {
+		appearance: none;
+		border: currentColor 0.125rem solid;
+		padding: 0 1rem;
+		background-color: hsla(0 0% 0% / 0);
+		color: var(--color-text);
+		font-size: 1.25rem;
+		letter-spacing: 0.1ch;
+		cursor: pointer;
+	}
+
+	:global(button):is(:focus, :hover) {
+		background-color: hsla(0 0% 0% / 0.125);
+		outline: none;
+	}
+
+	:global(button):is(:active) {
+		background-color: hsla(0 0% 0% / 0.25);
+	}
 </style>
