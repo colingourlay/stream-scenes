@@ -6,7 +6,7 @@
 	let isFinished: boolean = false;
 </script>
 
-<main>
+<article>
 	{#if $countdown}
 		<aside class:finished={isFinished}>
 			<Countdown timeMS={$countdown} bind:isFinished />
@@ -15,10 +15,10 @@
 	<section>
 		<Status chars="standby" />
 	</section>
-</main>
+</article>
 
 <style>
-	main {
+	article {
 		margin: auto;
 		display: flex;
 		flex-direction: column;

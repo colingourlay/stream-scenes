@@ -7,13 +7,13 @@
 	export let isSecondSecondary = isSecondary;
 </script>
 
-<main>
-	<article><Frame {aspect} isSecondary={isFirstSecondary} /></article>
-	<article><Frame {aspect} isSecondary={isSecondSecondary} /></article>
-</main>
+<article>
+	<section><Frame {aspect} isSecondary={isFirstSecondary} /></section>
+	<section><Frame {aspect} isSecondary={isSecondSecondary} /></section>
+</article>
 
 <style>
-	main {
+	article {
 		width: 100%;
 		height: 100%;
 		display: flex;
@@ -22,7 +22,7 @@
 		align-items: center;
 	}
 
-	article {
+	section {
 		width: 46.25%;
 	}
 </style>

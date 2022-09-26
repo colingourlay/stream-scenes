@@ -9,13 +9,13 @@
 	export let isSidebarSecondary = false;
 </script>
 
-<main class:isFlipped>
-	<article><Frame {aspect} isSecondary={isFrameSecondary || isSecondary} /></article>
+<article class:isFlipped>
+	<section><Frame {aspect} isSecondary={isFrameSecondary || isSecondary} /></section>
 	<aside><Backdrop isSecondary={isSidebarSecondary || isSecondary} /></aside>
-</main>
+</article>
 
 <style>
-	main {
+	article {
 		width: 100%;
 		height: 100%;
 		display: flex;
@@ -26,7 +26,7 @@
 		flex-direction: row-reverse;
 	}
 
-	article {
+	section {
 		margin: auto;
 		width: 75%;
 	}
