@@ -1,15 +1,18 @@
 <script lang="ts">
+	import Backdrop from '$components/Backdrop/Backdrop.svelte';
 	import CountdownPicker from '$components/Countdown/CountdownPicker.svelte';
 </script>
 
-<article>
-	<h2>Countdown</h2>
-	<CountdownPicker minutes={[1]} />
-</article>
+<Backdrop>
+	<article>
+		<h2>Countdown</h2>
+		<CountdownPicker minutes={[1]} />
+	</article>
+</Backdrop>
 
 <style>
 	article {
-		width: 100%;
+		padding: 0.5rem;
 		max-width: 20rem;
 	}
 
