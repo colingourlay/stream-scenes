@@ -1,4 +1,7 @@
 export const SCHEMES: Record<string, Record<string, string>> = {
+	abc: {
+		'color-primary': '#fdc605'
+	},
 	monochrome: {
 		'saturation-primary': '100%',
 		'saturation-secondary': '100%',
