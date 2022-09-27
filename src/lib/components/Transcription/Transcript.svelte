@@ -1,45 +1,35 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import { createWebSocket } from './constants';
+	import { onMount } from 'svelte';
+	import { TRANSCRIPTION_SERVER_URL } from '$lib/config';
 
 	export let numVisibleLines: number = 2;
 	export let showInterimLine: boolean = false;
 
 	let recentLines: string[] = [];
 	let interimLine: string | null = null;
-	let socket: WebSocket;
+	let es: EventSource;
 
 	$: visibleRecentLines = showInterimLine && interimLine ? recentLines.slice(-1) : recentLines;
 
-	if (browser) {
-		socket = createWebSocket();
+	onMount(() => {
+		es = new EventSource(`${TRANSCRIPTION_SERVER_URL}/sub`);
 
-		socket.addEventListener('message', (event) => {
-			if (!event.data) {
-				return;
-			}
+		es.addEventListener('line', ({ data }) => {
+			recentLines = [...recentLines, data].slice(-numVisibleLines);
+			interimLine = null;
+		});
 
-			const { type, payload } = JSON.parse(event.data);
-
-			switch (type) {
-				case 'line':
-					recentLines = [...recentLines, payload].slice(-numVisibleLines);
-					interimLine = null;
-					break;
-				case 'interimLine':
-					if (showInterimLine) {
-						interimLine = payload;
-					}
-					break;
-				case 'reset':
-					recentLines = [];
-					interimLine = null;
-					break;
-				default:
-					break;
+		es.addEventListener('interimLine', ({ data }) => {
+			if (showInterimLine) {
+				interimLine = data;
 			}
 		});
-	}
+
+		es.addEventListener('reset', () => {
+			recentLines = [];
+			interimLine = null;
+		});
+	});
 </script>
 
 <article>

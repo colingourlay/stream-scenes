@@ -1,28 +1,19 @@
-<script context="module" lang="ts">
-	declare global {
-		interface Window {
-			webkitSpeechRecognition: any;
-		}
-	}
-</script>
-
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { createWebSocket } from './constants';
+	import { TRANSCRIPTION_SERVER_URL } from '$lib/config';
 
-	let socket: WebSocket;
 	let recognition: SpeechRecognition;
 	let isRecognitionActive: boolean;
 	let lastError: string | null = null;
 
 	const start = () => recognition && recognition.start();
 	const stop = () => recognition && recognition.abort();
-	const reset = () => socket && socket.send(JSON.stringify({ type: 'reset' }));
+	const pub = (event: string, data = '') =>
+		navigator.sendBeacon(`${TRANSCRIPTION_SERVER_URL}/pub`, new URLSearchParams({ event, data }));
+	const reset = () => pub('reset');
 
 	onMount(() => {
 		if ('webkitSpeechRecognition' in window) {
-			socket = createWebSocket();
-
 			recognition = new window.webkitSpeechRecognition();
 			recognition.continuous = true;
 			recognition.interimResults = true;
@@ -45,12 +36,7 @@
 
 				const result = results[resultIndex];
 
-				socket.send(
-					JSON.stringify({
-						type: result.isFinal ? 'line' : 'interimLine',
-						payload: result[0].transcript
-					})
-				);
+				pub(result.isFinal ? 'line' : 'interimLine', result[0].transcript);
 			};
 		}
 	});

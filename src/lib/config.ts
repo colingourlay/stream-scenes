@@ -1,1 +1,1 @@
-export const WEBSOCKET_SERVER_URL = import.meta.env.VITE_WEBSOCKET_SERVER_URL;
+export const TRANSCRIPTION_SERVER_URL = import.meta.env.VITE_TRANSCRIPTION_SERVER_URL;
