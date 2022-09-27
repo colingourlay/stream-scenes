@@ -71,7 +71,8 @@
 
 <style>
 	article {
-		justify-self: flex-end;
+		align-self: stretch;
+		margin-top: auto;
 		-webkit-mask-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 15%);
 		mask-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 15%);
 	}
