@@ -1,14 +1,11 @@
-import { PIESOCKET_API_KEY } from '$lib/config';
-
-export const ROOM_ID = 'stream-scenes-transcription';
-export const SOCKET_URL = `wss://free3.piesocket.com/v3/${ROOM_ID}?api_key=${PIESOCKET_API_KEY}`;
-export const JOIN_MESSAGE = JSON.stringify({ join: ROOM_ID });
+import { WEBSOCKET_SERVER_URL } from '$lib/config';
 
 export const createWebSocket = (): WebSocket => {
-	const socket = new WebSocket(SOCKET_URL);
+	const socket = new WebSocket(WEBSOCKET_SERVER_URL);
 
-	socket.onclose = () => setTimeout(window.location.reload, 100);
-	socket.onopen = () => socket.send(JOIN_MESSAGE);
+	socket.onclose = (event) =>
+		event.code !== 1006 && setTimeout(() => window.location.reload(), 100);
+	socket.onerror = (event) => console.error(event);
 
 	return socket;
 };

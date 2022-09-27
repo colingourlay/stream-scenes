@@ -32,7 +32,6 @@
 
 			socket.send(
 				JSON.stringify({
-					msg: true,
 					type: result.isFinal ? 'line' : 'interimLine',
 					payload: result[0].transcript
 				})
@@ -42,7 +41,7 @@
 
 	const start = () => recognition && recognition.start();
 	const stop = () => recognition && recognition.abort();
-	const reset = () => socket.send(JSON.stringify({ msg: true, type: 'reset' }));
+	const reset = () => socket.send(JSON.stringify({ type: 'reset' }));
 </script>
 
 {#if recognition}

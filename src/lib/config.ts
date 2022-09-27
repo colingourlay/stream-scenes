@@ -1,1 +1,1 @@
-export const PIESOCKET_API_KEY = import.meta.env.VITE_PIESOCKET_API_KEY;
+export const WEBSOCKET_SERVER_URL = import.meta.env.VITE_WEBSOCKET_SERVER_URL;
