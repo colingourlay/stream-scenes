@@ -30,19 +30,26 @@ a:is(:link, :visited) {
 button {
 	appearance: none;
 	border: currentColor 0.125rem solid;
-	padding: 0 1rem;
-	background-color: hsla(0 0% 0% / 0);
+	padding: 0.5rem 1rem;
+	background-color: hsla(0 0% 100% / 0);
 	color: var(--color-text);
 	font-size: 1.25rem;
+	line-height: 1.25;
 	letter-spacing: 0.1ch;
 	cursor: pointer;
 }
 
 button:is(:focus, :hover) {
-	background-color: hsla(0 0% 0% / 0.125);
+	background-color: hsla(0 0% 100% / 0.125);
 	outline: none;
 }
 
 button:is(:active) {
+	background-color: hsla(0 0% 100% / 0.25);
+}
+
+button[disabled] {
+	opacity: 0.5;
 	background-color: hsla(0 0% 0% / 0.25);
+	cursor: not-allowed;
 }

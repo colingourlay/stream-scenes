@@ -42,17 +42,16 @@
 		padding: 0;
 	}
 
-	menu ul {
+	ul {
 		padding: 0;
 	}
 
-	menu li {
+	li {
 		margin-bottom: 0.25rem;
 		list-style: none;
 	}
 
-	menu button {
+	button {
 		width: 100%;
-		line-height: 2;
 	}
 </style>
