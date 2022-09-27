@@ -14,7 +14,7 @@ body {
 	margin: 0;
 }
 
-body > div:first-child {
+body > div:not([style]) {
 	width: var(--viewport-width, 100vw);
 	height: var(--viewport-height, 100vh);
 	display: flex;
