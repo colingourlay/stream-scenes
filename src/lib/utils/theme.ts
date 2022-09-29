@@ -24,7 +24,7 @@ export const DEFAULT_THEME: Required<Theme> = {
 	'hue-text': '0',
 	'hue-primary': '120',
 	'hue-secondary': '240',
-	'saturation-text': '100%',
+	'saturation-text': '0%',
 	'saturation-primary': '50%',
 	'saturation-secondary': '50%',
 	'lightness-text': '100%',
