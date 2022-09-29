@@ -1,28 +1,37 @@
 <script lang="ts">
 	import type * as Ably from 'ably';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { getChannel } from './ably';
+
+	interface Line {
+		receivedAt: number;
+		text: string;
+	}
 
 	export let numVisibleLines: number = 2;
 	export let showInterimLine: boolean = false;
 
-	let recentLines: string[] = [];
-	let interimLine: string | null = null;
+	let recentLines: Line[] = [];
+	let interimLine: Line | null = null;
 	let channel: Ably.Types.RealtimeChannelPromise;
+	let cleanupTimer: NodeJS.Timer;
 
-	$: visibleRecentLines = showInterimLine && interimLine ? recentLines.slice(-1) : recentLines;
+	$: visibleLines =
+		showInterimLine && interimLine ? [...recentLines.slice(-1), interimLine] : recentLines;
 
 	onMount(async () => {
 		channel = await getChannel();
 
 		channel.subscribe('line', ({ data }) => {
-			recentLines = [...recentLines, data].slice(-numVisibleLines);
+			recentLines = [...recentLines, { receivedAt: Date.now(), text: data }].slice(
+				-numVisibleLines
+			);
 			interimLine = null;
 		});
 
 		channel.subscribe('interimLine', ({ data }) => {
 			if (showInterimLine) {
-				interimLine = data;
+				interimLine = { receivedAt: Date.now(), text: data };
 			}
 		});
 
@@ -30,62 +39,46 @@
 			recentLines = [];
 			interimLine = null;
 		});
+
+		cleanupTimer = setInterval(() => {
+			if (recentLines.length > 0) {
+				recentLines = recentLines.filter(({ receivedAt }) => Date.now() - receivedAt < 10000);
+			}
+		}, 2000);
+	});
+
+	onDestroy(() => {
+		clearInterval(cleanupTimer);
 	});
 </script>
 
 <article>
-	<svg width="0" height="0">
-		<defs>
-			<filter id="outliner">
-				<feMorphology in="SourceAlpha" result="DILATED" operator="dilate" radius="5" />
-				<feFlood
-					flood-color="var(--theme-color-text-outline, hsla(0 0% 0% / 0))"
-					flood-opacity="1"
-					result="OUTLINE_COLOUR"
-				/>
-				<feComposite in="OUTLINE_COLOUR" in2="DILATED" operator="in" result="OUTLINE" />
-
-				<feMerge>
-					<feMergeNode in="OUTLINE" />
-					<feMergeNode in="SourceGraphic" />
-				</feMerge>
-			</filter>
-		</defs>
-	</svg>
-	{#each visibleRecentLines as line}
-		<p>{line}</p>
+	{#each visibleLines as line}
+		<p><span>{line.text}</span></p>
 	{/each}
-	{#if showInterimLine && interimLine}
-		<p class="interim">{interimLine}</p>
-	{/if}
 </article>
 
 <style>
 	article {
 		align-self: stretch;
 		margin-top: auto;
-		-webkit-mask-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 15%);
-		mask-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 15%);
 	}
 
 	p {
 		margin: 0;
-		padding: 0.5vw 1vw;
-		font-size: 5vw;
-		line-height: 1.33;
-		letter-spacing: 0.1ch;
-		filter: url(#outliner);
+		font-size: 3vw;
+		font-weight: 700;
+		letter-spacing: 0.025em;
 	}
-
-	.interim {
-		font-style: italic;
-	}
-
 	p::first-letter {
 		text-transform: capitalize;
 	}
 
-	p::after {
-		content: '.';
+	span {
+		padding: 0.25em;
+		background-color: hsla(0 0% calc(100% - var(--lightness-text)) / 0.67);
+		line-height: 1.68;
+		-webkit-box-decoration-break: clone;
+		box-decoration-break: clone;
 	}
 </style>
