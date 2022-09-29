@@ -66,7 +66,7 @@ export const PRESETS_THEMES: Record<Preset, Theme> = {
 		'lightness-secondary': '100%'
 	},
 	playdate: {
-		'color-primary': '#fbc651',
+		'color-primary': '#ffb739',
 		'color-secondary': '#6c00ff'
 	},
 	rebecca: {
