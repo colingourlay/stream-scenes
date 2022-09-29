@@ -1,31 +1,32 @@
 <script lang="ts">
+	import type * as Ably from 'ably';
 	import { onMount } from 'svelte';
-	import { TRANSCRIPTION_SERVER_URL } from '$lib/config';
+	import { getChannel } from './ably';
 
 	export let numVisibleLines: number = 2;
 	export let showInterimLine: boolean = false;
 
 	let recentLines: string[] = [];
 	let interimLine: string | null = null;
-	let es: EventSource;
+	let channel: Ably.Types.RealtimeChannelPromise;
 
 	$: visibleRecentLines = showInterimLine && interimLine ? recentLines.slice(-1) : recentLines;
 
-	onMount(() => {
-		es = new EventSource(`${TRANSCRIPTION_SERVER_URL}/sub`);
+	onMount(async () => {
+		channel = await getChannel();
 
-		es.addEventListener('line', ({ data }) => {
+		channel.subscribe('line', ({ data }) => {
 			recentLines = [...recentLines, data].slice(-numVisibleLines);
 			interimLine = null;
 		});
 
-		es.addEventListener('interimLine', ({ data }) => {
+		channel.subscribe('interimLine', ({ data }) => {
 			if (showInterimLine) {
 				interimLine = data;
 			}
 		});
 
-		es.addEventListener('reset', () => {
+		channel.subscribe('reset', () => {
 			recentLines = [];
 			interimLine = null;
 		});

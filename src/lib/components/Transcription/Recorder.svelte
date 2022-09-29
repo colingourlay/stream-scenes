@@ -1,19 +1,22 @@
 <script lang="ts">
+	import type * as Ably from 'ably';
 	import { onMount } from 'svelte';
-	import { TRANSCRIPTION_SERVER_URL } from '$lib/config';
+	import { getChannel } from './ably';
 
 	let recognition: SpeechRecognition;
 	let isRecognitionActive: boolean;
 	let lastError: string | null = null;
+	let channel: Ably.Types.RealtimeChannelPromise;
 
 	const start = () => recognition && recognition.start();
 	const stop = () => recognition && recognition.abort();
-	const pub = (event: string, data = '') =>
-		navigator.sendBeacon(`${TRANSCRIPTION_SERVER_URL}/pub`, new URLSearchParams({ event, data }));
+	const pub = (type: string, payload = '') => channel.publish(type, payload);
 	const reset = () => pub('reset');
 
-	onMount(() => {
+	onMount(async () => {
 		if ('webkitSpeechRecognition' in window) {
+			channel = await getChannel();
+
 			recognition = new window.webkitSpeechRecognition();
 			recognition.continuous = true;
 			recognition.interimResults = true;

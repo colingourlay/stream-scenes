@@ -1,1 +1,1 @@
-export const TRANSCRIPTION_SERVER_URL = import.meta.env.VITE_TRANSCRIPTION_SERVER_URL;
+export const ABLY_API_KEY = import.meta.env.VITE_ABLY_API_KEY;
