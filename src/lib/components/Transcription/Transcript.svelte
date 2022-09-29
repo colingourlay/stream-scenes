@@ -76,7 +76,7 @@
 
 	span {
 		padding: 0.25em;
-		background-color: hsla(0 0% calc(100% - var(--lightness-text)) / 0.67);
+		background-color: hsla(0 0% calc(100% - var(--lightness-text)) / 0.8);
 		line-height: 1.68;
 		-webkit-box-decoration-break: clone;
 		box-decoration-break: clone;
