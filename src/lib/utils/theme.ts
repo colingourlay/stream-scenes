@@ -1,17 +1,12 @@
 const THEMEABLE_CUSTOM_PROPERTIES = [
-	'hue-text',
 	'hue-primary',
 	'hue-secondary',
-	'saturation-text',
 	'saturation-primary',
 	'saturation-secondary',
-	'lightness-text',
 	'lightness-primary',
 	'lightness-secondary',
-	'alpha-text',
 	'alpha-primary',
 	'alpha-secondary',
-	'color-text',
 	'color-primary',
 	'color-secondary'
 ] as const;
@@ -21,20 +16,14 @@ export type ThemeableCustomProperty = typeof THEMEABLE_CUSTOM_PROPERTIES[number]
 export type Theme = Partial<Record<ThemeableCustomProperty, string>>;
 
 export const DEFAULT_THEME: Required<Theme> = {
-	'hue-text': '0',
 	'hue-primary': '120',
 	'hue-secondary': '240',
-	'saturation-text': '0%',
 	'saturation-primary': '50%',
 	'saturation-secondary': '50%',
-	'lightness-text': '100%',
 	'lightness-primary': '50%',
 	'lightness-secondary': '50%',
-	'alpha-text': '1',
 	'alpha-primary': '1',
 	'alpha-secondary': '1',
-	'color-text':
-		'hsl(var(--hue-text) var(--saturation-text) var(--lightness-text) / var(--alpha-text))',
 	'color-primary':
 		'hsl(var(--hue-primary) var(--saturation-primary) var(--lightness-primary) / var(--alpha-primary))',
 	'color-secondary':
