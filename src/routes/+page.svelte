@@ -14,9 +14,3 @@
 		<li><a href="/transcript-recorder">Transcript Recorder</a></li>
 	</ul>
 </article>
-
-<style>
-	li {
-		font-size: 2rem;
-	}
-</style>

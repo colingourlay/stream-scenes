@@ -34,6 +34,5 @@
 
 	li > :global(*) {
 		width: 100%;
-		font-size: 1.125em;
 	}
 </style>

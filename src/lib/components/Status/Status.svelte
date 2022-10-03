@@ -11,17 +11,17 @@
 <style>
 	p {
 		margin: 0;
-		font-size: 10vw;
+		font-size: 4rem;
 		font-weight: 200;
 	}
 
 	.long {
-		font-size: 7.5vw;
+		font-size: 3rem;
 	}
 
 	span {
 		display: inline-block;
-		padding: 1.5vw;
+		padding: 0.6rem;
 		animation: 5s ease infinite chars;
 	}
 

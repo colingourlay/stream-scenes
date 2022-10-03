@@ -26,7 +26,7 @@
 
 <style>
 	time {
-		font-size: 12.5vw;
+		font-size: 5rem;
 		font-variant-numeric: tabular-nums;
 		font-weight: 200;
 	}

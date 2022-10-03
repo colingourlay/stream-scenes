@@ -7,6 +7,7 @@ html {
 	overflow: hidden;
 	background-color: transparent;
 	font-family: var(--font-family-sans);
+	font-size: max(16px, calc(var(--viewport-width) * 0.025));
 }
 
 body {
@@ -28,6 +29,11 @@ a:is(:link, :visited) {
 
 button {
 	cursor: pointer;
+	border: currentColor 0.1em solid;
+	border-radius: 0.25em;
+	padding: 0.25em 0.5em;
+	background-color: hsla(0 0% 0% / 0.125);
+	font-size: inherit;
 }
 
 button[disabled] {
