@@ -1,17 +1,40 @@
 <script lang="ts">
 	import type * as Ably from 'ably';
 	import { onMount } from 'svelte';
+	import Menu from '../Menu/Menu.svelte';
 	import { getChannel } from './ably';
+
+	interface MenuItem {
+		label: string;
+		handler: () => void;
+		isDisabled: boolean;
+	}
 
 	let recognition: SpeechRecognition;
 	let isRecognitionActive: boolean;
 	let lastError: string | null = null;
 	let channel: Ably.Types.RealtimeChannelPromise;
+	let items: MenuItem[];
 
-	const start = () => recognition && recognition.start();
-	const stop = () => recognition && recognition.abort();
-	const pub = (type: string, payload = '') => channel.publish(type, payload);
-	const reset = () => pub('reset');
+	const pub = (type: string, payload = '') => channel && channel.publish(type, payload);
+
+	$: items = [
+		{
+			label: 'Start',
+			handler: () => recognition && recognition.start(),
+			isDisabled: isRecognitionActive
+		},
+		{
+			label: 'Stop',
+			handler: () => recognition && recognition.abort(),
+			isDisabled: !isRecognitionActive
+		},
+		{
+			label: 'Reset',
+			handler: () => pub('reset'),
+			isDisabled: !isRecognitionActive
+		}
+	];
 
 	onMount(async () => {
 		if ('webkitSpeechRecognition' in window) {
@@ -46,38 +69,11 @@
 </script>
 
 {#if recognition}
-	<menu>
-		<ul>
-			<li>
-				<button on:click={start} disabled={isRecognitionActive}>Start</button>
-			</li>
-			<li>
-				<button on:click={stop} disabled={!isRecognitionActive}>Stop</button>
-			</li>
-			<li>
-				<button on:click={reset} disabled={!isRecognitionActive}>Reset</button>
-			</li>
-		</ul>
-	</menu>
+	<Menu {items}>
+		<button slot="item" let:item on:click={item.handler} disabled={item.isDisabled}>
+			{item.label}
+		</button>
+	</Menu>
 {:else}
 	<p>Speech recognition not available</p>
 {/if}
-
-<style>
-	menu {
-		padding: 0;
-	}
-
-	ul {
-		padding: 0;
-	}
-
-	li {
-		margin-bottom: 0.25rem;
-		list-style: none;
-	}
-
-	button {
-		width: 100%;
-	}
-</style>
