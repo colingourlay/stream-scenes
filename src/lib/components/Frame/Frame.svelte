@@ -12,8 +12,8 @@
 <style>
 	figure {
 		margin: 0;
-		outline: var(--frame-color) solid calc(var(--viewport-width) * 0.005);
-		border-radius: calc(var(--viewport-width) * 0.005);
+		outline: var(--frame-color) solid 0.2rem;
+		border-radius: 0.2rem;
 		padding-bottom: calc(100% / var(--frame-aspect));
 		width: 100%;
 		height: 0;
