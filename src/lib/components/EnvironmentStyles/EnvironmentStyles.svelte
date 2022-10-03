@@ -14,10 +14,6 @@
 	$: if (browser) {
 		document.documentElement.style.setProperty('--viewport-height', `${viewportHeight}px`);
 		document.documentElement.style.setProperty('--viewport-width', `${viewportWidth}px`);
-
-		if (window.obsstudio) {
-			document.documentElement.style.setProperty('--viewport-background-alpha', '0');
-		}
 	}
 
 	onMount(() => {
