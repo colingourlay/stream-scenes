@@ -40,13 +40,18 @@ export const DEFAULT_THEME_DOCUMENT_ELEMENT_STYLE = `<style type="text/css">
 ${DEFAULT_THEME_DOCUMENT_ELEMENT_CSS}
 </style>`;
 
-export const PRESETS = ['abc', 'monochrome', 'playdate', 'rebecca', 'synthwave'] as const;
+export const PRESETS = ['abc', 'canva', 'monochrome', 'playdate', 'rebecca', 'synthwave'] as const;
 
 export type Preset = typeof PRESETS[number];
 
 export const PRESETS_THEMES: Record<Preset, Theme> = {
 	abc: {
 		'color-primary': '#fdc605'
+	},
+	canva: {
+		'hue-primary': '264.12',
+		'saturation-primary': '100%',
+		'lightness-primary': '61.96%'
 	},
 	monochrome: {
 		'saturation-primary': '100%',
