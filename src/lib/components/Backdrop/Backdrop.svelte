@@ -2,9 +2,9 @@
 	export let gradient: string;
 	export let isSecondary = false;
 
-	let colorA = `var(--color-${isSecondary ? 'secondary' : 'primary'})`;
-	let colorB = `var(--color-${isSecondary ? 'primary' : 'secondary'})`;
-	let image =
+	$: colorA = `var(--color-${isSecondary ? 'secondary' : 'primary'})`;
+	$: colorB = `var(--color-${isSecondary ? 'primary' : 'secondary'})`;
+	$: image =
 		gradient === 'linear'
 			? `linear-gradient(var(--angle-linear-gradient), ${colorB}, transparent)`
 			: gradient === 'radial'

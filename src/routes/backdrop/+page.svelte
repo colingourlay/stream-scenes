@@ -7,7 +7,7 @@
 	let isSecondary: boolean;
 
 	onMount(() => {
-		gradient = $page.url.searchParams.get('gradient') || undefined;
+		gradient = $page.url.searchParams.get('gradient');
 		isSecondary = $page.url.searchParams.has('secondary') || undefined;
 	});
 </script>
