@@ -50,8 +50,11 @@ export const PRESETS_THEMES: Record<Preset, Theme> = {
 	},
 	canva: {
 		'hue-primary': '264.12',
+		'hue-secondary': '182.35',
 		'saturation-primary': '100%',
-		'lightness-primary': '61.96%'
+		'saturation-secondary': '100%',
+		'lightness-primary': '61.96%',
+		'lightness-secondary': '40%'
 	},
 	monochrome: {
 		'saturation-primary': '100%',
