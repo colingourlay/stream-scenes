@@ -57,7 +57,7 @@ export const PRESETS_THEMES: Record<Preset, Theme> = {
 		'saturation-secondary': '100%',
 		'lightness-primary': '61.96%',
 		'lightness-secondary': '40%',
-		'angle-linear-gradient': '-45deg',
+		'angle-linear-gradient': '135deg',
 	},
 	monochrome: {
 		'saturation-primary': '100%',
