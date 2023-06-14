@@ -8,7 +8,8 @@ const THEMEABLE_CUSTOM_PROPERTIES = [
 	'alpha-primary',
 	'alpha-secondary',
 	'color-primary',
-	'color-secondary'
+	'color-secondary',
+	'angle-linear-gradient'
 ] as const;
 
 export type ThemeableCustomProperty = typeof THEMEABLE_CUSTOM_PROPERTIES[number];
@@ -27,7 +28,8 @@ export const DEFAULT_THEME: Required<Theme> = {
 	'color-primary':
 		'hsl(var(--hue-primary) var(--saturation-primary) var(--lightness-primary) / var(--alpha-primary))',
 	'color-secondary':
-		'hsl(var(--hue-secondary) var(--saturation-secondary) var(--lightness-secondary) / var(--alpha-secondary))'
+		'hsl(var(--hue-secondary) var(--saturation-secondary) var(--lightness-secondary) / var(--alpha-secondary))',
+	'angle-linear-gradient': '0deg'
 };
 
 export const DEFAULT_THEME_DOCUMENT_ELEMENT_CSS = `:root {
@@ -54,7 +56,8 @@ export const PRESETS_THEMES: Record<Preset, Theme> = {
 		'saturation-primary': '100%',
 		'saturation-secondary': '100%',
 		'lightness-primary': '61.96%',
-		'lightness-secondary': '40%'
+		'lightness-secondary': '40%',
+		'angle-linear-gradient': '-45deg',
 	},
 	monochrome: {
 		'saturation-primary': '100%',
