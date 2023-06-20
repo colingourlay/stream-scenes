@@ -10,21 +10,21 @@
 
 	interface MenuItem {
 		label: string;
-		time: number;
+		getTime: (() => number | null);
 	}
 
 	let items: MenuItem[] = [
-		{ label: 'None', time: null },
-		{ label: 'Next Hour', time: getNextMilestone(36e5) },
-		{ label: 'Next ½-Hour', time: getNextMilestone(18e5) },
-		{ label: 'Next ¼-Hour', time: getNextMilestone(9e5) },
+		{ label: 'None', getTime: () => null },
+		{ label: 'Next Hour', getTime: () => getNextMilestone(36e5) },
+		{ label: 'Next ½-Hour',  getTime: () => getNextMilestone(18e5) },
+		{ label: 'Next ¼-Hour',  getTime: () => getNextMilestone(9e5) },
 		...minutes.map((value) => ({
 			label: `${value} Minute${value === 1 ? '' : 's'}`,
-			time: getMinutesIntoFuture(value)
+			getTime: () => getMinutesIntoFuture(value)
 		}))
 	];
 </script>
 
 <Menu {items}>
-	<button slot="item" let:item on:click={() => countdown.set(item.time)}>{item.label}</button>
+	<button slot="item" let:item on:click={() => countdown.set(item.getTime())}>{item.label}</button>
 </Menu>
