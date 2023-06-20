@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let gradient: string;
+	export let gradient: string | undefined = undefined;
 	export let isSecondary = false;
 
 	$: colorA = `var(--color-${isSecondary ? 'secondary' : 'primary'})`;
