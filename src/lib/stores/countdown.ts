@@ -1,3 +1,3 @@
-import { writable } from 'svelte-local-storage-store';
+import { persisted } from 'svelte-local-storage-store';
 
-export default writable<number | null>('countdown', null);
+export default persisted<number | null>('countdown', null);
