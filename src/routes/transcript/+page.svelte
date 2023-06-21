@@ -1,13 +1,13 @@
-<script lang="ts">
-	import { onMount } from 'svelte';
+<script>
+	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import Transcript from '$lib/components/Transcription/Transcript.svelte';
 
 	let showInterimLine = false;
 
-	onMount(() => {
-		showInterimLine = $page.url.searchParams.has('interim') || undefined;
-	});
+	if (browser) {
+		showInterimLine = $page.url.searchParams.has('secondary');
+	}
 </script>
 
-<Transcript showInterimLine />
+<Transcript {showInterimLine} />

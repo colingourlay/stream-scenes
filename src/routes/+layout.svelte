@@ -1,14 +1,27 @@
-<script lang="ts">
-	import { onMount } from 'svelte';
+<script>
+	import { browser } from '$app/environment';
 	import EnvironmentStyles from '$lib/components/EnvironmentStyles/EnvironmentStyles.svelte';
 	import { install as installOBS } from '$lib/utils/obs';
-	import '../app.css';
+	import './styles.css';
 
-	onMount(() => {
+	if (browser) {
 		installOBS();
-	});
+	}
 </script>
 
 <EnvironmentStyles>
-	<slot />
+	<main>
+		<slot />
+	</main>
 </EnvironmentStyles>
+
+<style>
+	main {
+		width: var(--viewport-width);
+		height: var(--viewport-height);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+</style>

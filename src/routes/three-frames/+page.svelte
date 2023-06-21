@@ -1,21 +1,26 @@
-<script lang="ts">
-	import { onMount } from 'svelte';
+<script>
+	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import ThreeFrames from '$lib/components/ThreeFrames/ThreeFrames.svelte';
 
-	let aspect: number;
-	let isSecondary: boolean;
-	let isFirstSecondary: boolean;
-	let isSecondSecondary: boolean;
-	let isThirdSecondary: boolean;
+	/** @type {number | undefined}*/
+	let aspect;
+	/** @type {boolean} */
+	let isSecondary;
+	/** @type {boolean} */
+	let isFirstSecondary;
+	/** @type {boolean} */
+	let isSecondSecondary;
+	/** @type {boolean} */
+	let isThirdSecondary;
 
-	onMount(() => {
-		aspect = +$page.url.searchParams.get('aspect') || undefined;
-		isSecondary = $page.url.searchParams.has('secondary') || undefined;
-		isFirstSecondary = $page.url.searchParams.has('first-secondary') || undefined;
-		isSecondSecondary = $page.url.searchParams.has('second-secondary') || undefined;
-		isThirdSecondary = $page.url.searchParams.has('third-secondary') || undefined;
-	});
+	if (browser) {
+		aspect = Number($page.url.searchParams.get('aspect')) || undefined;
+		isSecondary = $page.url.searchParams.has('secondary');
+		isFirstSecondary = $page.url.searchParams.has('first-secondary');
+		isSecondSecondary = $page.url.searchParams.has('second-secondary');
+		isThirdSecondary = $page.url.searchParams.has('third-secondary');
+	}
 </script>
 
 <ThreeFrames {aspect} {isSecondary} {isFirstSecondary} {isSecondSecondary} {isThirdSecondary} />

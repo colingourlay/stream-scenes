@@ -1,7 +1,8 @@
-<script lang="ts">
+<script>
 	import Frame from '../Frame/Frame.svelte';
 
-	export let aspect: number | undefined = undefined;
+	/** @type {number | undefined} */
+	export let aspect;
 	export let isSecondary = false;
 </script>
 

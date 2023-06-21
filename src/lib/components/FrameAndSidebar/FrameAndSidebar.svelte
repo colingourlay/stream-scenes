@@ -1,8 +1,9 @@
-<script lang="ts">
+<script>
 	import Backdrop from '../Backdrop/Backdrop.svelte';
 	import Frame from '../Frame/Frame.svelte';
 
-	export let aspect: number | undefined = undefined;
+	/** @type {number | undefined} */
+	export let aspect = undefined;
 	export let isFlipped = false;
 	export let isSecondary = false;
 	export let isFrameSecondary = false;

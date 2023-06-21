@@ -1,23 +1,33 @@
-<script lang="ts">
+<script>
 	import countdown from '$lib/stores/countdown';
 	import Menu from '../Menu/Menu.svelte';
 
-	export let minutes: number[] = [];
+	/** @type {number[]} */
+	export let minutes = [];
 
-	const getNextMilestone = (milestonePeriodMS: number) =>
+	/**
+	 * @param {number} milestonePeriodMS
+	 */
+	const getNextMilestone = (milestonePeriodMS) =>
 		Math.ceil(Date.now() / milestonePeriodMS) * milestonePeriodMS;
-	const getMinutesIntoFuture = (minutes: number) => Date.now() + minutes * 6e4;
 
-	interface MenuItem {
-		label: string;
-		getTime: (() => number | null);
-	}
+	/**
+	 * @param {number} minutes
+	 */
+	const getMinutesIntoFuture = (minutes) => Date.now() + minutes * 6e4;
 
-	let items: MenuItem[] = [
+	/**
+	 * @typedef MenuItem
+	 * @prop {string} label
+	 * @prop {() => number | null} getTime
+	 */
+
+	/** @type {MenuItem[]} */
+	$: items = [
 		{ label: 'None', getTime: () => null },
 		{ label: 'Next Hour', getTime: () => getNextMilestone(36e5) },
-		{ label: 'Next ½-Hour',  getTime: () => getNextMilestone(18e5) },
-		{ label: 'Next ¼-Hour',  getTime: () => getNextMilestone(9e5) },
+		{ label: 'Next ½-Hour', getTime: () => getNextMilestone(18e5) },
+		{ label: 'Next ¼-Hour', getTime: () => getNextMilestone(9e5) },
 		...minutes.map((value) => ({
 			label: `${value} Minute${value === 1 ? '' : 's'}`,
 			getTime: () => getMinutesIntoFuture(value)
@@ -25,6 +35,8 @@
 	];
 </script>
 
-<Menu {items}>
-	<button slot="item" let:item on:click={() => countdown.set(item.getTime())}>{item.label}</button>
+<Menu>
+	{#each items as { label, getTime } (label)}
+		<li><button on:click={() => countdown.set(getTime())}>{label}</button></li>
+	{/each}
 </Menu>

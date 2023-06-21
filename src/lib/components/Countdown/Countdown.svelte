@@ -1,12 +1,14 @@
-<script lang="ts">
+<script>
 	import { onMount } from 'svelte';
 	import { hoursMinutesSeconds } from '$lib/utils/time';
 
-	export let timeMS: number;
-	export let isFinished: boolean = false;
+	export let timeMS = 0;
+	export let isFinished = false;
 
-	let msRemaining: number;
-	let timeRemaining: string;
+	/** @type {number} */
+	let msRemaining;
+	/** @type {string} */
+	let timeRemaining;
 
 	$: timeRemaining = hoursMinutesSeconds(msRemaining, true);
 	$: isFinished = msRemaining === 0;

@@ -1,7 +1,8 @@
-<script lang="ts">
+<script>
 	import Frame from '../Frame/Frame.svelte';
 
-	export let aspect: number | undefined = undefined;
+	/** @type {number | undefined} */
+	export let aspect = undefined;
 	export let isSecondary = false;
 	export let isFirstSecondary = isSecondary;
 	export let isSecondSecondary = isSecondary;
@@ -29,7 +30,7 @@
 		width: 37.25%;
 	}
 
-	article:last-child {
+	section:last-child {
 		margin-top: 2.5%;
 	}
 </style>

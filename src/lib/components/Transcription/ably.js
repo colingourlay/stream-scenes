@@ -1,7 +1,10 @@
 import * as Ably from 'ably';
 import { ABLY_API_KEY } from '$lib/config';
 
-export const getChannel = async (): Promise<Ably.Types.RealtimeChannelPromise> => {
+/**
+ * @returns {Promise<Ably.Types.RealtimeChannelPromise>}
+ */
+export const getChannel = async () => {
 	const ably = new Ably.Realtime.Promise(ABLY_API_KEY);
 
 	ably.connection.once('disconnected', () => {

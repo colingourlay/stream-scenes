@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 	import Backdrop from '$lib/components/Backdrop/Backdrop.svelte';
 	import CountdownPicker from '$lib/components/Countdown/CountdownPicker.svelte';
 </script>

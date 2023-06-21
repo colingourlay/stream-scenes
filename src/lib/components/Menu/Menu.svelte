@@ -1,21 +1,5 @@
-<script lang="ts">
-	type T = $$Generic;
-
-	export let items: T[];
-
-	interface $$Slots {
-		item: { item: T };
-	}
-</script>
-
 <menu>
-	<ul>
-		{#each items as item}
-			<li>
-				<slot name="item" {item} />
-			</li>
-		{/each}
-	</ul>
+	<slot />
 </menu>
 
 <style>
@@ -23,16 +7,12 @@
 		padding: 0;
 	}
 
-	ul {
-		padding: 0;
-	}
-
-	li {
+	menu > :global(li) {
 		margin-bottom: 0.25rem;
 		list-style: none;
 	}
 
-	li > :global(*) {
+	menu > :global(li) > :global(*) {
 		width: 100%;
 	}
 </style>

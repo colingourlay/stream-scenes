@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 	export let aspect = 16 / 9;
 	export let isSecondary = false;
 </script>

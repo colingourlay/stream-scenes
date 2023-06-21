@@ -1,4 +1,4 @@
-const THEMEABLE_CUSTOM_PROPERTIES = [
+const THEMEABLE_CUSTOM_PROPERTIES = /** @type {const} */ ([
 	'hue-primary',
 	'hue-secondary',
 	'saturation-primary',
@@ -10,13 +10,26 @@ const THEMEABLE_CUSTOM_PROPERTIES = [
 	'color-primary',
 	'color-secondary',
 	'angle-linear-gradient'
-] as const;
+]);
 
-export type ThemeableCustomProperty = typeof THEMEABLE_CUSTOM_PROPERTIES[number];
+/**
+ * @typedef {typeof THEMEABLE_CUSTOM_PROPERTIES[number]} ThemeableCustomProperty
+ */
 
-export type Theme = Partial<Record<ThemeableCustomProperty, string>>;
+/**
+ * @param {string} key
+ * @returns {value is ThemeableCustomProperty}
+ */
+const isThemeableCustomProperty = (key) => {
+	return THEMEABLE_CUSTOM_PROPERTIES.includes(/** @type ThemeableCustomProperty */ (key));
+};
 
-export const DEFAULT_THEME: Required<Theme> = {
+/**
+ * @typedef {Partial<Record<ThemeableCustomProperty, string>>} Theme
+ */
+
+/** @type {Required<Theme>} */
+export const DEFAULT_THEME = {
 	'hue-primary': '120',
 	'hue-secondary': '240',
 	'saturation-primary': '50%',
@@ -32,7 +45,7 @@ export const DEFAULT_THEME: Required<Theme> = {
 	'angle-linear-gradient': '0deg'
 };
 
-export const DEFAULT_THEME_DOCUMENT_ELEMENT_CSS = `:root {
+const DEFAULT_THEME_DOCUMENT_ELEMENT_CSS = `:root {
   ${Object.entries(DEFAULT_THEME)
 		.map(([key, value]) => `--${key}: var(--theme-${key}, ${value})`)
 		.join(';\n\t')}
@@ -42,11 +55,29 @@ export const DEFAULT_THEME_DOCUMENT_ELEMENT_STYLE = `<style type="text/css">
 ${DEFAULT_THEME_DOCUMENT_ELEMENT_CSS}
 </style>`;
 
-export const PRESETS = ['abc', 'canva', 'monochrome', 'playdate', 'rebecca', 'synthwave'] as const;
+export const PRESETS = /** @type {const} */ ([
+	'abc',
+	'canva',
+	'monochrome',
+	'playdate',
+	'rebecca',
+	'synthwave'
+]);
 
-export type Preset = typeof PRESETS[number];
+/**
+ * @typedef {typeof PRESETS[number]} Preset
+ */
 
-export const PRESETS_THEMES: Record<Preset, Theme> = {
+/**
+ * @param {string} key
+ * @returns {value is Preset}
+ */
+const isPreset = (key) => {
+	return PRESETS.includes(/** @type Preset */ (key));
+};
+
+/** @type {Record<Preset, Theme>} */
+export const PRESETS_THEMES = /** @type {const} */ ({
 	abc: {
 		'color-primary': '#fdc605'
 	},
@@ -57,7 +88,7 @@ export const PRESETS_THEMES: Record<Preset, Theme> = {
 		'saturation-secondary': '100%',
 		'lightness-primary': '61.96%',
 		'lightness-secondary': '40%',
-		'angle-linear-gradient': '135deg',
+		'angle-linear-gradient': '135deg'
 	},
 	monochrome: {
 		'saturation-primary': '100%',
@@ -76,15 +107,24 @@ export const PRESETS_THEMES: Record<Preset, Theme> = {
 		'color-primary': '#C724B1',
 		'color-secondary': '#71DBD4'
 	}
-} as const;
+});
 
-export const getThemeFromPreset = (scheme: string): Theme => PRESETS_THEMES[scheme] || {};
+/**
+ * @param {string} preset
+ * @returns {Theme}
+ */
+export const getThemeFromPreset = (preset) =>
+	isPreset(preset) ? PRESETS_THEMES[/** @type Preset */ (preset)] : {};
 
-export const getThemeFromSearchParams = (searchParams: URLSearchParams): Theme =>
+/**
+ * @param {URLSearchParams} searchParams
+ * @returns {Theme}
+ */
+export const getThemeFromSearchParams = (searchParams) =>
 	[...searchParams.entries()].reduce((memo, [key, value]) => {
-		if (THEMEABLE_CUSTOM_PROPERTIES.includes(key as ThemeableCustomProperty)) {
-			memo[key] = value;
+		if (isThemeableCustomProperty(key)) {
+			memo[/** @type ThemeableCustomProperty */ (key)] = value;
 		}
 
 		return memo;
-	}, getThemeFromPreset(searchParams.get('theme')));
+	}, getThemeFromPreset(searchParams.get('theme') || ''));

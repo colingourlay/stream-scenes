@@ -1,22 +1,32 @@
-<script lang="ts">
-	import type * as Ably from 'ably';
+<script>
 	import { onMount } from 'svelte';
 	import Menu from '../Menu/Menu.svelte';
 	import { getChannel } from './ably';
 
-	interface MenuItem {
-		label: string;
-		handler: () => void;
-		isDisabled: boolean;
-	}
+	/**
+	 * @typedef MenuItem
+	 * @prop {string} label
+	 * @prop {() => void} handler
+	 * @prop {boolean} isDisabled
+	 */
 
-	let recognition: SpeechRecognition;
-	let isRecognitionActive: boolean;
-	let lastError: string | null = null;
-	let channel: Ably.Types.RealtimeChannelPromise;
-	let items: MenuItem[];
+	/** @type {SpeechRecognition} */
+	let recognition;
+	/** @type {boolean} */
+	let isRecognitionActive;
+	/** @type {string | null} */
+	let lastError = null;
+	/** @type {import('ably').Types.RealtimeChannelPromise} */
+	let channel;
+	/** @type {MenuItem[]} */
+	let items;
 
-	const pub = (type: string, payload = '') => channel && channel.publish(type, payload);
+	/**
+	 *
+	 * @param {string} type
+	 * @param {string} payload
+	 */
+	const pub = (type, payload = '') => channel && channel.publish(type, payload);
 
 	$: items = [
 		{
@@ -69,10 +79,14 @@
 </script>
 
 {#if recognition}
-	<Menu {items}>
-		<button slot="item" let:item on:click={item.handler} disabled={item.isDisabled}>
-			{item.label}
-		</button>
+	<Menu>
+		{#each items as { label, handler, isDisabled } (label)}
+			<li>
+				<button on:click={handler} disabled={isDisabled}>
+					{label}
+				</button>
+			</li>
+		{/each}
 	</Menu>
 {:else}
 	<p>Speech recognition not available</p>

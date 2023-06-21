@@ -1,20 +1,24 @@
-<script lang="ts">
-	import type * as Ably from 'ably';
+<script>
 	import { onDestroy, onMount } from 'svelte';
 	import { getChannel } from './ably';
 
-	interface Line {
-		receivedAt: number;
-		text: string;
-	}
+	export let numVisibleLines = 2;
+	export let showInterimLine = false;
 
-	export let numVisibleLines: number = 2;
-	export let showInterimLine: boolean = false;
+	/**
+	 * @typedef Line
+	 * @prop {number} receivedAt
+	 * @prop {string} text
+	 */
 
-	let recentLines: Line[] = [];
-	let interimLine: Line | null = null;
-	let channel: Ably.Types.RealtimeChannelPromise;
-	let cleanupTimer: NodeJS.Timer;
+	/** @type {Line[]} */
+	let recentLines = [];
+	/** @type {Line | null} */
+	let interimLine = null;
+	/** @type {import('ably').Types.RealtimeChannelPromise} */
+	let channel;
+	/** @type {NodeJS.Timer} */
+	let cleanupTimer;
 
 	$: visibleLines =
 		showInterimLine && interimLine ? [...recentLines.slice(-1), interimLine] : recentLines;

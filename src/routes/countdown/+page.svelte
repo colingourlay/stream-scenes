@@ -1,8 +1,9 @@
-<script lang="ts">
+<script>
 	import Countdown from '$lib/components/Countdown/Countdown.svelte';
 	import countdown from '$lib/stores/countdown';
 
-	let isFinished: boolean = false;
+	/** @type {boolean} */
+	let isFinished = false;
 </script>
 
 <article class:finished={isFinished}>

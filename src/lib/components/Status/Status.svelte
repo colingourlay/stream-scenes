@@ -1,5 +1,6 @@
-<script lang="ts">
-	export let chars: string;
+<script>
+	/** @type {string} */
+	export let chars;
 </script>
 
 <p class:long={chars.length >= 10}>

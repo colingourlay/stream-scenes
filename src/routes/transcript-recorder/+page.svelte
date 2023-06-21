@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 	import Backdrop from '$lib/components/Backdrop/Backdrop.svelte';
 	import Recorder from '$lib/components/Transcription/Recorder.svelte';
 </script>
