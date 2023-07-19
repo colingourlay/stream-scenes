@@ -4,6 +4,7 @@
 
 	export let timeMS = 0;
 	export let isFinished = false;
+	export let isInline = false;
 
 	/** @type {number} */
 	let msRemaining;
@@ -24,12 +25,16 @@
 	update();
 </script>
 
-<time>{timeRemaining}</time>
+<time
+	style={`--countdown-font-size: ${isInline ? 1 : 5}rem; --countdown-font-weight: ${
+		isInline ? 'inherit' : 200
+	};`}>{timeRemaining}</time
+>
 
 <style>
 	time {
-		font-size: 5rem;
+		font-size: var(--countdown-font-size);
 		font-variant-numeric: tabular-nums;
-		font-weight: 200;
+		font-weight: var(--countdown-font-weight);
 	}
 </style>
