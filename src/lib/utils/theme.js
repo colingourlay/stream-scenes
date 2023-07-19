@@ -134,4 +134,4 @@ export const getThemeFromSearchParams = (searchParams) =>
 		}
 
 		return memo;
-	}, getThemeFromPreset(searchParams.get('theme') || ''));
+	}, /** @type {Theme} */ ({}));

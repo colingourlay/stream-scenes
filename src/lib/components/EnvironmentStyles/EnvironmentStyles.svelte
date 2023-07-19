@@ -12,7 +12,11 @@
 	let viewportWidth = 0;
 
 	$: theme = {
-		...getThemeFromPreset($globalThemePreset || ''),
+		...getThemeFromPreset(
+			browser && $page.url.searchParams.has('theme')
+				? $page.url.searchParams.get('theme') ?? ''
+				: $globalThemePreset ?? ''
+		),
 		...(browser ? getThemeFromSearchParams($page.url.searchParams) : {})
 	};
 
