@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import TwoFrames from '$lib/components/TwoFrames/TwoFrames.svelte';
 
-	/** @type {number | undefined}*/
+	/** @type {number | undefined} */
 	let aspect;
 	/** @type {boolean} */
 	let isSecondary;

@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import OneFrame from '$lib/components/OneFrame/OneFrame.svelte';
 
-	/** @type {number | undefined}*/
+	/** @type {number | undefined} */
 	let aspect;
 	/** @type {boolean} */
 	let isSecondary;

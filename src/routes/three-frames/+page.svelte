@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import ThreeFrames from '$lib/components/ThreeFrames/ThreeFrames.svelte';
 
-	/** @type {number | undefined}*/
+	/** @type {number | undefined} */
 	let aspect;
 	/** @type {boolean} */
 	let isSecondary;

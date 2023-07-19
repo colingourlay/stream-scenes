@@ -3,9 +3,9 @@
 	import { page } from '$app/stores';
 	import Backdrop from '$lib/components/Backdrop/Backdrop.svelte';
 
-	/** @type {string | undefined}*/
+	/** @type {string | undefined} */
 	let gradient;
-	/** @type {boolean}*/
+	/** @type {boolean} */
 	let isSecondary;
 
 	if (browser) {

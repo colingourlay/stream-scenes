@@ -4,7 +4,7 @@
 
 	/** @type {number | undefined} */
 	export let aspect = undefined;
-	/** @type {string | undefined}*/
+	/** @type {string | undefined} */
 	export let gradient = undefined;
 	export let isFlipped = false;
 	export let isSecondary = false;

@@ -3,9 +3,9 @@
 	import { page } from '$app/stores';
 	import FrameAndSidebar from '$lib/components/FrameAndSidebar/FrameAndSidebar.svelte';
 
-	/** @type {number | undefined}*/
+	/** @type {number | undefined} */
 	let aspect;
-	/** @type {string | undefined}*/
+	/** @type {string | undefined} */
 	let gradient;
 	/** @type {boolean} */
 	let isSecondary;
