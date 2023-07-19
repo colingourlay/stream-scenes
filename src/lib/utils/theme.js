@@ -92,9 +92,9 @@ export const PRESETS_THEMES = /** @type {const} */ ({
 	},
 	monochrome: {
 		'saturation-primary': '100%',
-		'saturation-secondary': '100%',
+		'saturation-secondary': '0%',
 		'lightness-primary': '100%',
-		'lightness-secondary': '100%'
+		'lightness-secondary': '0%'
 	},
 	playdate: {
 		'color-primary': '#ffb739',
