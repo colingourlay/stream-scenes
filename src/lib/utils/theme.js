@@ -111,6 +111,11 @@ export const PRESETS_THEMES = /** @type {const} */ ({
 	}
 });
 
+/** @type {Record<string, string>} */
+export const PRESETS_GRADIENTS = /** @type {const} */ ({
+	canva: 'linear'
+});
+
 /**
  * @param {string} preset
  * @returns {Theme}
