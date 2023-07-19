@@ -5,6 +5,8 @@
 
 	/** @type {number | undefined}*/
 	let aspect;
+	/** @type {string | undefined}*/
+	let gradient;
 	/** @type {boolean} */
 	let isSecondary;
 	/** @type {boolean} */
@@ -14,10 +16,11 @@
 
 	if (browser) {
 		aspect = Number($page.url.searchParams.get('aspect')) || undefined;
+		gradient = $page.url.searchParams.get('gradient') ?? undefined;
 		isSecondary = $page.url.searchParams.has('secondary');
 		isFrameSecondary = $page.url.searchParams.has('frame-secondary');
 		isSidebarSecondary = $page.url.searchParams.has('sidebar-secondary');
 	}
 </script>
 
-<FrameAndSidebar {aspect} {isSecondary} {isFrameSecondary} {isSidebarSecondary} />
+<FrameAndSidebar {aspect} {gradient} {isSecondary} {isFrameSecondary} {isSidebarSecondary} />
