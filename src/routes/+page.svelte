@@ -7,6 +7,7 @@
 		<li><a href="/one-frame">One Frame</a></li>
 		<li><a href="/two-frames">Two Frames</a></li>
 		<li><a href="/three-frames">Three Frames</a></li>
+		<li><a href="/docked-ring">Docked Ring</a></li>
 		<li><a href="/offline">Offline</a></li>
 		<li><a href="/countdown">Countdown</a></li>
 		<li><a href="/standby">Standby (includes Countdown)</a></li>
