@@ -20,7 +20,7 @@
 </script>
 
 <article
-	style={`--avatar-block-alignment: ${blockAlignment}; --avatar-inline-alignment: ${inlineAlignment};`}
+	style={`--ring-block-alignment: ${blockAlignment}; --ring-inline-alignment: ${inlineAlignment};`}
 >
 	<aside>
 		<Ring {isSecondary} />
@@ -32,8 +32,8 @@
 		width: 100%;
 		height: 100%;
 		display: flex;
-		align-items: var(--avatar-block-alignment);
-		justify-content: var(--avatar-inline-alignment);
+		align-items: var(--ring-block-alignment);
+		justify-content: var(--ring-inline-alignment);
 	}
 
 	aside {
