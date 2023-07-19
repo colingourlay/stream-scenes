@@ -79,7 +79,8 @@ const isPreset = (key) => {
 /** @type {Record<Preset, Theme>} */
 export const PRESETS_THEMES = /** @type {const} */ ({
 	abc: {
-		'color-primary': '#fdc605'
+		'color-primary': '#fdc605',
+		'color-secondary': '#fdc605'
 	},
 	canva: {
 		'hue-primary': '264.12',
@@ -101,7 +102,8 @@ export const PRESETS_THEMES = /** @type {const} */ ({
 		'color-secondary': '#6c00ff'
 	},
 	rebecca: {
-		'color-primary': '#663399'
+		'color-primary': '#663399',
+		'color-secondary': '#663399'
 	},
 	synthwave: {
 		'color-primary': '#C724B1',

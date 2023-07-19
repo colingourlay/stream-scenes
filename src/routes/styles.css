@@ -26,11 +26,11 @@ button {
 	border: currentColor 0.1em solid;
 	border-radius: 0.25em;
 	padding: 0.25em 0.5em;
-	background-color: hsla(0 0% 0% / 0.125);
+	background-color: hsla(0 0% 0% / 0.5);
 	font-size: inherit;
 }
 
 button[disabled] {
-	opacity: 0.5;
+	opacity: 0.8;
 	cursor: not-allowed;
 }
