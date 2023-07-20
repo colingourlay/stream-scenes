@@ -6,7 +6,7 @@
 	import GlobalThemePresetPicker from '$lib/components/Theme/GlobalThemePresetPicker.svelte';
 </script>
 
-<Backdrop isSecondary>
+<Backdrop>
 	<article>
 		<h3>Countdown (<Countdown timeMS={$countdown || 0} isInline />)</h3>
 		<CountdownPicker minutes={[1]} />
