@@ -83,19 +83,19 @@ export const PRESETS_THEMES = /** @type {const} */ ({
 		'color-secondary': '#fdc605'
 	},
 	canva: {
-		'hue-primary': '264.12',
-		'hue-secondary': '182.35',
+		'hue-primary': '182.35',
+		'hue-secondary': '264.12',
 		'saturation-primary': '100%',
 		'saturation-secondary': '100%',
-		'lightness-primary': '61.96%',
-		'lightness-secondary': '40%',
-		'angle-linear-gradient': '135deg'
+		'lightness-primary': '40%',
+		'lightness-secondary': '61.96%',
+		'angle-linear-gradient': '-45deg'
 	},
 	monochrome: {
-		'saturation-primary': '100%',
-		'saturation-secondary': '0%',
-		'lightness-primary': '100%',
-		'lightness-secondary': '0%'
+		'saturation-primary': '0%',
+		'saturation-secondary': '100%',
+		'lightness-primary': '0%',
+		'lightness-secondary': '100%'
 	},
 	playdate: {
 		'color-primary': '#ffb739',
