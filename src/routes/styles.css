@@ -34,6 +34,6 @@ button {
 
 button[disabled] {
 	opacity: 0.5;
-	color: initial;
+	color: inherit;
 	cursor: not-allowed;
 }
