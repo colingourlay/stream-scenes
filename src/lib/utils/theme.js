@@ -1,35 +1,4 @@
-const THEMEABLE_CUSTOM_PROPERTIES = /** @type {const} */ ([
-	'hue-primary',
-	'hue-secondary',
-	'saturation-primary',
-	'saturation-secondary',
-	'lightness-primary',
-	'lightness-secondary',
-	'alpha-primary',
-	'alpha-secondary',
-	'color-primary',
-	'color-secondary',
-	'angle-linear-gradient'
-]);
-
-/**
- * @typedef {typeof THEMEABLE_CUSTOM_PROPERTIES[number]} ThemeableCustomProperty
- */
-
-/**
- * @param {string} key
- * @returns {value is ThemeableCustomProperty}
- */
-const isThemeableCustomProperty = (key) => {
-	return THEMEABLE_CUSTOM_PROPERTIES.includes(/** @type ThemeableCustomProperty */ (key));
-};
-
-/**
- * @typedef {Partial<Record<ThemeableCustomProperty, string>>} Theme
- */
-
-/** @type {Required<Theme>} */
-export const DEFAULT_THEME = {
+const THEMEABLE_CUSTOM_PROPERTIES_DEFAULTS = /** @type {const} */ ({
 	'hue-primary': '120',
 	'hue-secondary': '240',
 	'saturation-primary': '50%',
@@ -41,12 +10,27 @@ export const DEFAULT_THEME = {
 	'color-primary':
 		'hsl(var(--hue-primary) var(--saturation-primary) var(--lightness-primary) / var(--alpha-primary))',
 	'color-secondary':
-		'hsl(var(--hue-secondary) var(--saturation-secondary) var(--lightness-secondary) / var(--alpha-secondary))',
-	'angle-linear-gradient': '180deg'
+		'hsl(var(--hue-secondary) var(--saturation-secondary) var(--lightness-secondary) / var(--alpha-secondary))'
+});
+
+/**
+ * @typedef {keyof typeof THEMEABLE_CUSTOM_PROPERTIES_DEFAULTS} ThemeableCustomProperty
+ */
+
+/**
+ * @typedef {Partial<Record<ThemeableCustomProperty, string>>} Theme
+ */
+
+/**
+ * @param {string} key
+ * @returns {value is ThemeableCustomProperty}
+ */
+const isThemeableCustomProperty = (key) => {
+	return key in THEMEABLE_CUSTOM_PROPERTIES_DEFAULTS;
 };
 
 const DEFAULT_THEME_DOCUMENT_ELEMENT_CSS = `:root {
-  ${Object.entries(DEFAULT_THEME)
+  ${Object.entries(THEMEABLE_CUSTOM_PROPERTIES_DEFAULTS)
 		.map(([key, value]) => `--${key}: var(--theme-${key}, ${value})`)
 		.join(';\n\t')}
 }`;
@@ -88,8 +72,7 @@ export const PRESETS_THEMES = /** @type {const} */ ({
 		'saturation-primary': '100%',
 		'saturation-secondary': '100%',
 		'lightness-primary': '40%',
-		'lightness-secondary': '61.96%',
-		'angle-linear-gradient': '-45deg'
+		'lightness-secondary': '61.96%'
 	},
 	monochrome: {
 		'saturation-primary': '0%',
@@ -112,9 +95,9 @@ export const PRESETS_THEMES = /** @type {const} */ ({
 });
 
 /** @type {Record<string, string>} */
-export const PRESETS_GRADIENTS = /** @type {const} */ ({
-	canva: 'linear',
-	synthwave: 'linear'
+export const PRESETS_IMAGES = /** @type {const} */ ({
+	// canva: `linear-gradient(120deg, #00c4cc 11%, #72be44 23%, #fd0 37%, #fbbf0a 40%, #f79d16 46%, #f5891d 50%, #f48120 53%, #ee402f 66%, #ed3e75 80%, #df3c83 81%, #bc35a7 84%, #a030c4 88%, #8d2dd8 91%, #812be4 94%, #7d2ae8 98%)`,
+	canva: `linear-gradient(120deg, var(--color-primary), var(--color-primary) 30%, #6420ff 50%, var(--color-secondary) 80%)`
 });
 
 /**
