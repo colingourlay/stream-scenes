@@ -1,19 +1,12 @@
 <script>
-	/** @type {string | undefined} */
-	export let gradient = undefined;
+	export let image = 'none';
 	export let isSecondary = false;
 
-	$: colorA = `var(--color-${isSecondary ? 'secondary' : 'primary'})`;
-	$: colorB = `var(--color-${isSecondary ? 'primary' : 'secondary'})`;
-	$: image =
-		gradient === 'linear'
-			? `linear-gradient(var(--angle-linear-gradient), ${colorB}, transparent)`
-			: gradient === 'radial'
-			? `radial-gradient(circle, ${colorB}, transparent)`
-			: 'none';
+	$: color =
+		image === 'none' ? `var(--color-${isSecondary ? 'secondary' : 'primary'})` : 'transparent';
 </script>
 
-<div style={`--backdrop-color: ${colorA}; --backdrop-image: ${image};`}>
+<div style={`--backdrop-color: ${color}; --backdrop-image: ${image};`}>
 	<slot />
 </div>
 

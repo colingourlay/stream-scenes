@@ -5,7 +5,7 @@
 	/** @type {number | undefined} */
 	export let aspect = undefined;
 	/** @type {string | undefined} */
-	export let gradient = undefined;
+	export let image = undefined;
 	export let isFlipped = false;
 	export let isSecondary = false;
 	export let isFrameSecondary = false;
@@ -14,7 +14,7 @@
 
 <article class:isFlipped>
 	<section><Frame {aspect} isSecondary={isFrameSecondary || isSecondary} /></section>
-	<aside><Backdrop {gradient} isSecondary={isSidebarSecondary || isSecondary} /></aside>
+	<aside><Backdrop {image} isSecondary={isSidebarSecondary || isSecondary} /></aside>
 </article>
 
 <style>
