@@ -1,4 +1,6 @@
 <script>
+	/* eslint svelte/no-at-html-tags: "off" */
+
 	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import preset from '$lib/stores/preset';
