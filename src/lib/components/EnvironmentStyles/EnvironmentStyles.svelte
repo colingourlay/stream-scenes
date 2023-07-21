@@ -8,24 +8,22 @@
 		getThemeFromSearchParams,
 		getThemeFromPreset
 	} from '$lib/utils/theme';
+	import { applyViewport } from '$lib/utils/viewport';
 
 	let viewportHeight = 0;
 	let viewportWidth = 0;
 
-	$: theme = {
-		...getThemeFromPreset(
-			browser && $page.url.searchParams.has('preset')
-				? $page.url.searchParams.get('preset') ?? ''
-				: $globalThemePreset ?? ''
-		),
-		...(browser ? getThemeFromSearchParams($page.url.searchParams) : {})
-	};
+	$: browser &&
+		applyTheme({
+			...getThemeFromPreset(
+				$page.url.searchParams.has('preset')
+					? $page.url.searchParams.get('preset') ?? ''
+					: $globalThemePreset ?? ''
+			),
+			...getThemeFromSearchParams($page.url.searchParams)
+		});
 
-	$: if (browser) {
-		applyTheme(theme);
-		document.documentElement.style.setProperty('--viewport-height', `${viewportHeight}px`);
-		document.documentElement.style.setProperty('--viewport-width', `${viewportWidth}px`);
-	}
+	$: browser && applyViewport(viewportHeight, viewportWidth);
 </script>
 
 <svelte:window bind:innerHeight={viewportHeight} bind:innerWidth={viewportWidth} />
