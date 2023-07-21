@@ -20,7 +20,7 @@
 		aspect = Number($page.url.searchParams.get('aspect')) || undefined;
 		image =
 			$page.url.searchParams.get('image') ??
-			PRESETS_IMAGES[$page.url.searchParams.get('preset') || $preset || ''];
+			PRESETS_IMAGES[$page.url.searchParams.get('preset') ?? $preset ?? ''];
 		isSecondary = $page.url.searchParams.has('secondary');
 		isFrameSecondary = $page.url.searchParams.has('frame-secondary');
 		isSidebarSecondary = $page.url.searchParams.has('sidebar-secondary');

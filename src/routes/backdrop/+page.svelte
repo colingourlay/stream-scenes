@@ -13,7 +13,7 @@
 	$: if (browser) {
 		image =
 			$page.url.searchParams.get('image') ??
-			PRESETS_IMAGES[$page.url.searchParams.get('preset') || $preset || ''];
+			PRESETS_IMAGES[$page.url.searchParams.get('preset') ?? $preset ?? ''];
 		isSecondary = $page.url.searchParams.has('secondary');
 	}
 </script>
