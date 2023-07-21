@@ -22,7 +22,8 @@ const isPreset = (key) => {
 /** @type {Record<string, string>} */
 export const PRESETS_IMAGES = /** @type {const} */ ({
 	// canva: `linear-gradient(120deg, #00c4cc 11%, #72be44 23%, #fd0 37%, #fbbf0a 40%, #f79d16 46%, #f5891d 50%, #f48120 53%, #ee402f 66%, #ed3e75 80%, #df3c83 81%, #bc35a7 84%, #a030c4 88%, #8d2dd8 91%, #812be4 94%, #7d2ae8 98%)`,
-	canva: `linear-gradient(120deg, var(--color-primary), var(--color-primary) 30%, #6420ff 50%, var(--color-secondary) 80%)`
+	canva: `linear-gradient(120deg, var(--color-primary) 20%, #6420ff 50%, var(--color-secondary) 80%)`,
+	synthwave: `linear-gradient(0deg, var(--color-primary) 50%, var(--color-secondary))`
 });
 
 /** @type {Record<Preset, import('./theme').Theme>} */
