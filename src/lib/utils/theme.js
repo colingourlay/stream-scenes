@@ -42,7 +42,7 @@ export const DEFAULT_THEME = {
 		'hsl(var(--hue-primary) var(--saturation-primary) var(--lightness-primary) / var(--alpha-primary))',
 	'color-secondary':
 		'hsl(var(--hue-secondary) var(--saturation-secondary) var(--lightness-secondary) / var(--alpha-secondary))',
-	'angle-linear-gradient': '0deg'
+	'angle-linear-gradient': '180deg'
 };
 
 const DEFAULT_THEME_DOCUMENT_ELEMENT_CSS = `:root {
