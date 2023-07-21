@@ -4,6 +4,7 @@
 	import globalThemePreset from '$lib/stores/globalThemePreset';
 	import {
 		DEFAULT_THEME_DOCUMENT_ELEMENT_STYLE,
+		applyTheme,
 		getThemeFromSearchParams,
 		getThemeFromPreset
 	} from '$lib/utils/theme';
@@ -21,10 +22,7 @@
 	};
 
 	$: if (browser) {
-		document.documentElement.setAttribute('style', '');
-		Object.entries(theme).forEach(([key, value]) => {
-			document.documentElement.style.setProperty(`--theme-${key}`, value);
-		});
+		applyTheme(theme);
 		document.documentElement.style.setProperty('--viewport-height', `${viewportHeight}px`);
 		document.documentElement.style.setProperty('--viewport-width', `${viewportWidth}px`);
 	}

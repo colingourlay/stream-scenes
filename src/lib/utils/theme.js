@@ -119,3 +119,13 @@ export const getThemeFromSearchParams = (searchParams) =>
 
 		return memo;
 	}, /** @type {Theme} */ ({}));
+
+/**
+ * @param {Theme} theme
+ */
+export const applyTheme = (theme) => {
+	document.documentElement.setAttribute('style', '');
+	Object.entries(theme).forEach(([key, value]) => {
+		document.documentElement.style.setProperty(`--theme-${key}`, value);
+	});
+};
