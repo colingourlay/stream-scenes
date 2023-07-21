@@ -13,8 +13,8 @@
 
 	$: theme = {
 		...getThemeFromPreset(
-			browser && $page.url.searchParams.has('theme')
-				? $page.url.searchParams.get('theme') ?? ''
+			browser && $page.url.searchParams.has('preset')
+				? $page.url.searchParams.get('preset') ?? ''
 				: $globalThemePreset ?? ''
 		),
 		...(browser ? getThemeFromSearchParams($page.url.searchParams) : {})

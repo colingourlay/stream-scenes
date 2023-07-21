@@ -11,7 +11,7 @@
 	let isSecondary;
 
 	$: if (browser) {
-		const preset = $page.url.searchParams.get('theme') || $globalThemePreset || '';
+		const preset = $page.url.searchParams.get('preset') || $globalThemePreset || '';
 
 		image = $page.url.searchParams.get('image') ?? PRESETS_IMAGES[preset];
 		isSecondary = $page.url.searchParams.has('secondary');

@@ -17,7 +17,7 @@
 	let isSidebarSecondary;
 
 	$: if (browser) {
-		const preset = $page.url.searchParams.get('theme') || $globalThemePreset || '';
+		const preset = $page.url.searchParams.get('preset') || $globalThemePreset || '';
 
 		aspect = Number($page.url.searchParams.get('aspect')) || undefined;
 		image = $page.url.searchParams.get('image') ?? PRESETS_IMAGES[preset];
