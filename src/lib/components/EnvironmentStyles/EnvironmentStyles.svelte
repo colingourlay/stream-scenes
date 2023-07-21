@@ -1,12 +1,12 @@
 <script>
 	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
-	import globalThemePreset from '$lib/stores/globalThemePreset';
+	import preset from '$lib/stores/preset';
+	import { getThemeFromPreset } from '$lib/utils/preset';
 	import {
 		DEFAULT_THEME_DOCUMENT_ELEMENT_STYLE,
 		applyTheme,
-		getThemeFromSearchParams,
-		getThemeFromPreset
+		getThemeFromSearchParams
 	} from '$lib/utils/theme';
 	import { applyViewport } from '$lib/utils/viewport';
 
@@ -15,11 +15,7 @@
 
 	$: browser &&
 		applyTheme({
-			...getThemeFromPreset(
-				$page.url.searchParams.has('preset')
-					? $page.url.searchParams.get('preset') ?? ''
-					: $globalThemePreset ?? ''
-			),
+			...getThemeFromPreset($page.url.searchParams.get('preset') ?? $preset ?? ''),
 			...getThemeFromSearchParams($page.url.searchParams)
 		});
 

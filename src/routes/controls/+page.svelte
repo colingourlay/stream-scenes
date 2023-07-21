@@ -3,7 +3,7 @@
 	import Backdrop from '$lib/components/Backdrop/Backdrop.svelte';
 	import Countdown from '$lib/components/Countdown/Countdown.svelte';
 	import CountdownPicker from '$lib/components/Countdown/CountdownPicker.svelte';
-	import GlobalThemePresetPicker from '$lib/components/Theme/GlobalThemePresetPicker.svelte';
+	import PresetPicker from '$lib/components/Preset/PresetPicker.svelte';
 </script>
 
 <Backdrop>
@@ -11,7 +11,7 @@
 		<h3>Countdown (<Countdown timeMS={$countdown || 0} isInline />)</h3>
 		<CountdownPicker minutes={[1]} />
 		<h3>Global Theme Preset</h3>
-		<GlobalThemePresetPicker />
+		<PresetPicker />
 	</article>
 </Backdrop>
 
