@@ -4,7 +4,9 @@
 	export let isSecondary = false;
 
 	$: color =
-		image !== undefined ? 'transparent' : `var(--color-${isSecondary ? 'secondary' : 'primary'})`;
+		image !== undefined && image !== 'none'
+			? 'transparent'
+			: `var(--color-${isSecondary ? 'secondary' : 'primary'})`;
 </script>
 
 <div style={`--backdrop-color: ${color}; --backdrop-image: ${image ?? 'none'};`}>
