@@ -3,7 +3,8 @@
 
 	/** @type {number | undefined} */
 	export let aspect;
-	export let isSecondary = false;
+	/** @type {boolean | undefined} */
+	export let isSecondary;
 </script>
 
 <article><Frame {aspect} {isSecondary} /></article>

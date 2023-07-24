@@ -2,15 +2,18 @@
 	import Frame from '../Frame/Frame.svelte';
 
 	/** @type {number | undefined} */
-	export let aspect = undefined;
-	export let isSecondary = false;
-	export let isFirstSecondary = isSecondary;
-	export let isSecondSecondary = isSecondary;
+	export let aspect;
+	/** @type {boolean | undefined} */
+	export let isSecondary;
+	/** @type {boolean | undefined} */
+	export let isFirstSecondary;
+	/** @type {boolean | undefined} */
+	export let isSecondSecondary;
 </script>
 
 <article>
-	<section><Frame {aspect} isSecondary={isFirstSecondary} /></section>
-	<section><Frame {aspect} isSecondary={isSecondSecondary} /></section>
+	<section><Frame {aspect} isSecondary={isFirstSecondary ?? isSecondary} /></section>
+	<section><Frame {aspect} isSecondary={isSecondSecondary ?? isSecondary} /></section>
 </article>
 
 <style>

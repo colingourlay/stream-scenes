@@ -3,7 +3,8 @@
 
 	/**	@type {string} */
 	export let position = 'bottom-right';
-	export let isSecondary = false;
+	/**	@type {boolean | undefined} */
+	export let isSecondary;
 
 	let blockAlignment =
 		position.indexOf('top') > -1

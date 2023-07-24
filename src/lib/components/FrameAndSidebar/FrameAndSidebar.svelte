@@ -3,18 +3,21 @@
 	import Frame from '../Frame/Frame.svelte';
 
 	/** @type {number | undefined} */
-	export let aspect = undefined;
+	export let aspect;
 	/** @type {string | undefined} */
-	export let image = undefined;
+	export let image;
 	export let isFlipped = false;
-	export let isSecondary = false;
-	export let isFrameSecondary = false;
-	export let isSidebarSecondary = false;
+	/** @type {boolean | undefined} */
+	export let isSecondary;
+	/** @type {boolean | undefined} */
+	export let isFrameSecondary;
+	/** @type {boolean | undefined} */
+	export let isSidebarSecondary;
 </script>
 
 <article class:isFlipped>
-	<section><Frame {aspect} isSecondary={isFrameSecondary || isSecondary} /></section>
-	<aside><Backdrop {image} isSecondary={isSidebarSecondary || isSecondary} /></aside>
+	<section><Frame {aspect} isSecondary={isFrameSecondary ?? isSecondary} /></section>
+	<aside><Backdrop {image} isSecondary={isSidebarSecondary ?? isSecondary} /></aside>
 </article>
 
 <style>

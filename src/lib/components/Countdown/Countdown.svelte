@@ -8,8 +8,6 @@
 
 	/** @type {number} */
 	let msRemaining;
-	/** @type {string} */
-	let timeRemaining;
 
 	$: timeRemaining = hoursMinutesSeconds(msRemaining, true);
 	$: isFinished = msRemaining === 0;
