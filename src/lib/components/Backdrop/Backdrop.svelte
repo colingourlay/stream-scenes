@@ -1,15 +1,13 @@
 <script>
-	/** @type {string | undefined} */
-	export let image = undefined;
+	/** @type {string} */
+	export let image = 'none';
 	export let isSecondary = false;
 
 	$: color =
-		image !== undefined && image !== 'none'
-			? 'transparent'
-			: `var(--color-${isSecondary ? 'secondary' : 'primary'})`;
+		image !== 'none' ? 'transparent' : `var(--color-${isSecondary ? 'secondary' : 'primary'})`;
 </script>
 
-<div style={`--backdrop-color: ${color}; --backdrop-image: ${image ?? 'none'};`}>
+<div style={`--backdrop-color: ${color}; --backdrop-image: ${image};`}>
 	<slot />
 </div>
 
