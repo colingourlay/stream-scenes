@@ -3,7 +3,7 @@
 	import Recorder from '$lib/components/Transcription/Recorder.svelte';
 </script>
 
-<Backdrop isSecondary>
+<Backdrop>
 	<article>
 		<h2>Transcription</h2>
 		<Recorder />
