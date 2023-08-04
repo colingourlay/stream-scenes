@@ -13,6 +13,7 @@
 		--frame-aspect: ${aspect};
 		--frame-radius: ${radius};
 		--frame-image: linear-gradient(#000, #000), ${image || `linear-gradient(${color}, ${color})`};
+		--temp-frame-color: ${color};
 	`}
 />
 
@@ -21,12 +22,16 @@
 		box-sizing: content-box;
 		aspect-ratio: var(--frame-aspect);
 		margin: -0.2rem;
-		border: transparent solid 0.2rem;
+		/* border: transparent solid 0.2rem; */
 		border-radius: var(--frame-radius);
 		width: 100%;
 		height: auto;
-		background-clip: padding-box, border-box;
-		background-origin: padding-box, border-box;
-		background-image: var(--frame-image);
+		/* background-clip: padding-box, border-box; */
+		/* background-origin: padding-box, border-box; */
+		/* background-image: var(--frame-image); */
+
+		/* TEMPORARILY RESTORE COLOR-BASED BORDERS AS IMAGE-BASED ONES AREN'T MASKED */
+
+		border: var(--temp-frame-color) solid 0.2rem;
 	}
 </style>
