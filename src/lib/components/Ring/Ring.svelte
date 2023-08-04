@@ -3,6 +3,8 @@
 
 	/** @type {boolean | undefined }*/
 	export let isSecondary;
+	/** @type {string | undefined} */
+	export let image = undefined;
 </script>
 
-<Frame aspect={1} radius={'50%'} {isSecondary} />
+<Frame aspect={1} radius={'50%'} {image} {isSecondary} />

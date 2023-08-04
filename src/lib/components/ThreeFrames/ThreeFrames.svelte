@@ -3,6 +3,8 @@
 
 	/** @type {number | undefined} */
 	export let aspect;
+	/** @type {string | undefined} */
+	export let image;
 	/** @type {boolean | undefined} */
 	export let isSecondary;
 	/** @type {boolean | undefined} */
@@ -14,9 +16,9 @@
 </script>
 
 <article>
-	<section><Frame {aspect} isSecondary={isFirstSecondary ?? isSecondary} /></section>
-	<section><Frame {aspect} isSecondary={isSecondSecondary ?? isSecondary} /></section>
-	<section><Frame {aspect} isSecondary={isThirdSecondary ?? isSecondary} /></section>
+	<section><Frame {aspect} {image} isSecondary={isFirstSecondary ?? isSecondary} /></section>
+	<section><Frame {aspect} {image} isSecondary={isSecondSecondary ?? isSecondary} /></section>
+	<section><Frame {aspect} {image} isSecondary={isThirdSecondary ?? isSecondary} /></section>
 </article>
 
 <style>

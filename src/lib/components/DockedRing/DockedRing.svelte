@@ -3,6 +3,8 @@
 
 	/**	@type {string} */
 	export let position = 'bottom-right';
+	/** @type {string | undefined} */
+	export let image = undefined;
 	/**	@type {boolean | undefined} */
 	export let isSecondary;
 
@@ -24,7 +26,7 @@
 	style={`--ring-block-alignment: ${blockAlignment}; --ring-inline-alignment: ${inlineAlignment};`}
 >
 	<aside>
-		<Ring {isSecondary} />
+		<Ring {image} {isSecondary} />
 	</aside>
 </article>
 

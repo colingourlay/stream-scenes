@@ -3,11 +3,13 @@
 
 	/** @type {number | undefined} */
 	export let aspect;
+	/** @type {string | undefined} */
+	export let image;
 	/** @type {boolean | undefined} */
 	export let isSecondary;
 </script>
 
-<article><Frame {aspect} {isSecondary} /></article>
+<article><Frame {aspect} {image} {isSecondary} /></article>
 
 <style>
 	article {

@@ -16,7 +16,7 @@
 </script>
 
 <article class:isFlipped>
-	<section><Frame {aspect} isSecondary={isFrameSecondary ?? isSecondary} /></section>
+	<section><Frame {aspect} {image} isSecondary={isFrameSecondary ?? isSecondary} /></section>
 	<aside><Backdrop {image} isSecondary={isSidebarSecondary ?? isSecondary} /></aside>
 </article>
 
