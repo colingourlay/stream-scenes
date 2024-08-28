@@ -12,7 +12,7 @@
 	/** @type {boolean} */
 	let isSecondary;
 
-	if (browser) {
+	$: if (browser) {
 		aspect = Number($page.url.searchParams.get('aspect')) || undefined;
 		image =
 			$page.url.searchParams.get('image') ??

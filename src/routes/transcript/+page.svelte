@@ -5,7 +5,7 @@
 
 	let showInterimLine = false;
 
-	if (browser) {
+	$: if (browser) {
 		showInterimLine = $page.url.searchParams.has('secondary');
 	}
 </script>

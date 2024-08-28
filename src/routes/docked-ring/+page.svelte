@@ -12,7 +12,7 @@
 	/** @type {boolean} */
 	let isSecondary;
 
-	if (browser) {
+	$: if (browser) {
 		position = $page.url.searchParams.get('position') || undefined;
 		image =
 			$page.url.searchParams.get('image') ??
