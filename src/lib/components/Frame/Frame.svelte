@@ -1,18 +1,42 @@
 <script>
-	export let aspect = 16 / 9;
-	export let radius = '0.4rem';
+	import { resize } from 'svelte-resize-observer-action';
+	import { getMaskURL } from './utils';
+
+	export let thicknessVW = 0.5;
+	export let isCircle = false;
+	export let aspect = isCircle ? 1 : 16 / 9;
 	/** @type {string | undefined} */
 	export let image = undefined;
 	export let isSecondary = false;
+
+	let thicknessPx = 0;
+	let frameRadiusPx = 0;
+	let maskURL = '';
+
+	/** @type {(entry: ResizeObserverEntry) => void} */
+	const onResize = (entry) => {
+		thicknessPx = (window.innerWidth / 100) * thicknessVW;
+
+		const { width: contentWidthPx, height: contentHeightPx } = entry.contentRect;		
+		const contentRadiusPx = isCircle ? contentWidthPx / 2 : thicknessPx;
+		const frameWidthPx = contentWidthPx + 2 * thicknessPx;
+		const frameHeightPx = contentHeightPx + 2 * thicknessPx;
+		
+		frameRadiusPx = isCircle ? frameWidthPx / 2 : thicknessPx * 2;
+		maskURL = getMaskURL(thicknessPx, frameWidthPx, frameHeightPx, contentWidthPx, contentHeightPx, contentRadiusPx);
+	};
 
 	$: color = `var(--color-${isSecondary ? 'secondary' : 'primary'})`;
 </script>
 
 <figure
+	use:resize={onResize}
 	style={`
 		--frame-aspect: ${aspect};
-		--frame-radius: ${radius};
-		--frame-image: linear-gradient(#000, #000), ${image || `linear-gradient(${color}, ${color})`};
+		--frame-thickness: ${thicknessPx}px;
+		--frame-radius: ${frameRadiusPx}px;
+		--frame-image: ${image || `linear-gradient(${color}, ${color})`};
+		--frame-mask: url(${maskURL});
 		--temp-frame-color: ${color};
 	`}
 />
@@ -21,17 +45,21 @@
 	figure {
 		box-sizing: content-box;
 		aspect-ratio: var(--frame-aspect);
-		margin: -0.2rem;
-		/* border: transparent solid 0.2rem; */
+		margin: calc(var(--frame-thickness) * -1);
+		border: transparent solid var(--frame-thickness);
 		border-radius: var(--frame-radius);
 		width: 100%;
 		height: auto;
-		/* background-clip: padding-box, border-box; */
-		/* background-origin: padding-box, border-box; */
-		/* background-image: var(--frame-image); */
+		background-origin: border-box;
+		background-image: var(--frame-image);
+		mask-image: var(--frame-mask);
+	}
 
-		/* TEMPORARILY RESTORE COLOR-BASED BORDERS AS IMAGE-BASED ONES AREN'T MASKED */
-
-		border: var(--temp-frame-color) solid 0.2rem;
+	@supports not (mask-image: none) {
+		figure {
+			border: var(--temp-frame-color) solid var(--frame-thickness);
+			background-origin: unset;
+			background-image: unset;
+		}
 	}
 </style>
