@@ -13,6 +13,8 @@
 	let frameRadiusPx = 0;
 	let maskURL = '';
 
+	// TODO: When updating to Svelte 5, remove `use:resize` in favour of `bind:clientWidth` &
+	// `bind:clientHeight` which will use `ResizeObserver` instead of an `iframe` ruler.
 	/** @type {(entry: ResizeObserverEntry) => void} */
 	const onResize = (entry) => {
 		thicknessPx = Math.round((window.innerWidth / 100) * thicknessVW);
