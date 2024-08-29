@@ -1,3 +1,3 @@
-import { persisted } from 'svelte-local-storage-store';
+import { persisted } from 'svelte-persisted-store';
 
 export default persisted('countdown', /** @type {number | null} */ (null));

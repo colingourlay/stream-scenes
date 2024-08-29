@@ -33,7 +33,7 @@
 	"type": "module",
 	"dependencies": {
 		"ably": "^1.2.29",
-		"svelte-local-storage-store": "^0.5.0",
+		"svelte-persisted-store": "^0.11.0",
 		"svelte-resize-observer-action": "^0.0.4"
 	}
 }
