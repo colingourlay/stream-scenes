@@ -37,6 +37,7 @@
 		--frame-radius: ${frameRadiusPx}px;
 		--frame-image: ${image || `linear-gradient(${color}, ${color})`};
 		--frame-mask: url(${maskURL});
+		--temp-frame-color: ${color};
 	`}
 />
 
@@ -49,9 +50,16 @@
 		border-radius: var(--frame-radius);
 		width: 100%;
 		height: auto;
-		background-clip: border-box;
 		background-origin: border-box;
 		background-image: var(--frame-image);
 		mask-image: var(--frame-mask);
+	}
+
+	@supports not (mask-image: none) {
+		figure {
+			border: var(--temp-frame-color) solid var(--frame-thickness);
+			background-origin: unset;
+			background-image: unset;
+		}
 	}
 </style>
