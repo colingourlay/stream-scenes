@@ -15,15 +15,22 @@
 
 	/** @type {(entry: ResizeObserverEntry) => void} */
 	const onResize = (entry) => {
-		thicknessPx = (window.innerWidth / 100) * thicknessVW;
+		thicknessPx = Math.round((window.innerWidth / 100) * thicknessVW);
 
-		const { width: contentWidthPx, height: contentHeightPx } = entry.contentRect;		
-		const contentRadiusPx = isCircle ? contentWidthPx / 2 : thicknessPx;
-		const frameWidthPx = contentWidthPx + 2 * thicknessPx;
-		const frameHeightPx = contentHeightPx + 2 * thicknessPx;
-		
+		const { blockSize, inlineSize } = entry.contentBoxSize[0];
+		const contentRadiusPx = isCircle ? inlineSize / 2 : thicknessPx;
+		const frameWidthPx = inlineSize + 2 * thicknessPx;
+		const frameHeightPx = blockSize + 2 * thicknessPx;
+
 		frameRadiusPx = isCircle ? frameWidthPx / 2 : thicknessPx * 2;
-		maskURL = getMaskURL(thicknessPx, frameWidthPx, frameHeightPx, contentWidthPx, contentHeightPx, contentRadiusPx);
+		maskURL = getMaskURL(
+			thicknessPx,
+			frameWidthPx,
+			frameHeightPx,
+			inlineSize,
+			blockSize,
+			contentRadiusPx
+		);
 	};
 
 	$: color = `var(--color-${isSecondary ? 'secondary' : 'primary'})`;
