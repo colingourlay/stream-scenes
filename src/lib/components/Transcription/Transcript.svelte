@@ -72,17 +72,29 @@
 		margin: 0;
 		font-size: 1.25rem;
 		font-weight: 700;
-		letter-spacing: 0.025em;
+		letter-spacing: 0.025ch;
+		text-align: center;
 	}
+
 	p::first-letter {
 		text-transform: capitalize;
 	}
 
+	p ~ p {
+		margin-top: 0.25ch;
+	}
+
 	span {
-		padding: 0.25em;
-		background-color: hsla(0 0% calc(100% - var(--lightness-text)) / 0.8);
-		line-height: 1.68;
+		padding: 0.25ch 0.5ch 0.25ch;
+		background-color: hsla(0 0% 0% / 0.75);
+		border-radius: 0.375ch;
+		line-height: 1.5;
 		-webkit-box-decoration-break: clone;
 		box-decoration-break: clone;
+	}
+
+	p:empty,
+	span:empty {
+		display: none;
 	}
 </style>
