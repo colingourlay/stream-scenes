@@ -5,5 +5,5 @@ export const getMaskURL = (thicknessPx, contentWidthPx, contentHeightPx, content
 			thicknessPx / 2
 		}" width="${contentWidthPx + thicknessPx}" height="${contentHeightPx + thicknessPx}" rx="${
 			contentRadiusPx + thicknessPx / 2
-		}" stroke="#fff" stroke-width="${thicknessPx}" /></mask></svg>`
+		}" stroke="#fff" stroke-width="${thicknessPx}" fill="none" /></mask></svg>`
 	)}#x`;
