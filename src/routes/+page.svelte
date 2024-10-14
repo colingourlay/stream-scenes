@@ -8,9 +8,9 @@
 		<li><a href="/two-frames">Two Frames</a></li>
 		<li><a href="/three-frames">Three Frames</a></li>
 		<li><a href="/docked-ring">Docked Ring</a></li>
-		<li><a href="/offline">Offline</a></li>
+		<li><a href="/status">Status</a></li>
 		<li><a href="/countdown">Countdown</a></li>
-		<li><a href="/standby">Standby (includes Countdown)</a></li>
+		<li><a href="/countdown-and-status">Countdown &amp; Status</a></li>
 		<li><a href="/transcript">Transcript</a></li>
 		<li><a href="/transcript-recorder">Transcript Recorder</a></li>
 	</ul>
