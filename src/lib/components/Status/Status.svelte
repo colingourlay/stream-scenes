@@ -4,7 +4,7 @@
 </script>
 
 <p class:long={chars.length >= 10}>
-	{#each chars.toUpperCase().split('') as char}
+	{#each [...chars.toUpperCase()] as char}
 		<span>{char}</span>
 	{/each}
 </p>
