@@ -1,5 +1,19 @@
+<script module>
+	/** @typedef {import('svelte').Snippet} Snippet */
+
+	/**
+	 * @typedef {Object} MenuProps
+	 * @property {Snippet} [children]
+	 */
+</script>
+
+<script>
+	/** @type {MenuProps} */
+	let { children } = $props();
+</script>
+
 <menu>
-	<slot />
+	{@render children?.()}
 </menu>
 
 <style>

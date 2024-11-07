@@ -1,9 +1,16 @@
-<script>
+<script module>
 	import countdown from '$lib/stores/countdown';
 	import Menu from '../Menu/Menu.svelte';
 
-	/** @type {number[]} */
-	export let minutes = [];
+	/**
+	 * @typedef {Object} CountdownPickerProps
+	 * @property {number[]} [minutes]
+	 */
+</script>
+
+<script>
+	/** @type {CountdownPickerProps} */
+	let { minutes = [] } = $props();
 
 	/**
 	 * @param {number} milestonePeriodMS
@@ -23,7 +30,7 @@
 	 */
 
 	/** @type {MenuItem[]} */
-	$: items = [
+	let items = $derived([
 		{ label: 'None', getTime: () => null },
 		{ label: 'Next Hour', getTime: () => getNextMilestone(36e5) },
 		{ label: 'Next ½-Hour', getTime: () => getNextMilestone(18e5) },
@@ -32,11 +39,11 @@
 			label: `${value} Minute${value === 1 ? '' : 's'}`,
 			getTime: () => getMinutesIntoFuture(value)
 		}))
-	];
+	]);
 </script>
 
 <Menu>
 	{#each items as { label, getTime } (label)}
-		<li><button on:click={() => countdown.set(getTime())}>{label}</button></li>
+		<li><button onclick={() => countdown.set(getTime())}>{label}</button></li>
 	{/each}
 </Menu>

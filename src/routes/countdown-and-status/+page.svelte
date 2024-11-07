@@ -1,18 +1,22 @@
-<script>
-	import { browser } from '$app/environment';
+<script module>
 	import { page } from '$app/stores';
 	import Countdown from '$lib/components/Countdown/Countdown.svelte';
 	import Status from '$lib/components/Status/Status.svelte';
 	import countdown from '$lib/stores/countdown';
 
-	/** @type {string} */
-	let chars = '';
+	/** @typedef {import('$lib/components/Countdown/Countdown.svelte').CountdownProps} CountdownProps */
+	/** @typedef {import('$lib/components/Status/Status.svelte').StatusProps} StatusProps */
+</script>
 
-	let isFinished = false;
+<script>
+	/** @type {boolean} */
+	let isFinished = $state(false);
+	/** @type {StatusProps["chars"]} */
+	let chars = $state('');
 
-	$: if (browser) {
+	$effect.pre(() => {
 		chars = $page.url.searchParams.get('chars') ?? '-----';
-	}
+	});
 </script>
 
 <article>
@@ -35,7 +39,9 @@
 	}
 
 	aside {
-		transition: opacity 1.5s 0.25s, transform 2s ease-in-out;
+		transition:
+			opacity 1.5s 0.25s,
+			transform 2s ease-in-out;
 	}
 
 	.finished {

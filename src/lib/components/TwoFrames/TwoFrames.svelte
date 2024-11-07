@@ -1,21 +1,26 @@
-<script>
+<script module>
 	import Frame from '../Frame/Frame.svelte';
 
-	/** @type {number | undefined} */
-	export let aspect;
-	/** @type {string | undefined} */
-	export let image;
-	/** @type {boolean | undefined} */
-	export let isSecondary;
-	/** @type {boolean | undefined} */
-	export let isFirstSecondary;
-	/** @type {boolean | undefined} */
-	export let isSecondSecondary;
+	/** @typedef {import('$lib/components/Frame/Frame.svelte').FrameProps} FrameProps */
+
+	/**
+	 * @typedef {Object} TwoFramesProps
+	 * @property {FrameProps["aspect"]} aspect
+	 * @property {FrameProps["image"]} image
+	 * @property {FrameProps["isSecondary"]} isSecondary
+	 * @property {FrameProps["isSecondary"]} isFirstSecondary
+	 * @property {FrameProps["isSecondary"]} isSecondSecondary
+	 */
+</script>
+
+<script>
+	/** @type {TwoFramesProps} */
+	let { aspect, image, isSecondary, isFirstSecondary, isSecondSecondary } = $props();
 </script>
 
 <article>
-	<section><Frame {aspect} {image} isSecondary={isFirstSecondary ?? isSecondary} /></section>
-	<section><Frame {aspect} {image} isSecondary={isSecondSecondary ?? isSecondary} /></section>
+	<section><Frame {aspect} {image} isSecondary={isFirstSecondary || isSecondary} /></section>
+	<section><Frame {aspect} {image} isSecondary={isSecondSecondary || isSecondary} /></section>
 </article>
 
 <style>

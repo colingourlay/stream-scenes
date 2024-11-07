@@ -1,12 +1,19 @@
-<script>
+<script module>
 	import Frame from '../Frame/Frame.svelte';
 
-	/** @type {number | undefined} */
-	export let aspect;
-	/** @type {string | undefined} */
-	export let image;
-	/** @type {boolean | undefined} */
-	export let isSecondary;
+	/** @typedef {import('$lib/components/Frame/Frame.svelte').FrameProps} FrameProps */
+
+	/**
+	 * @typedef {Object} OneFrameProps
+	 * @property {FrameProps["aspect"]} aspect
+	 * @property {FrameProps["image"]} image
+	 * @property {FrameProps["isSecondary"]} isSecondary
+	 */
+</script>
+
+<script>
+	/** @type {OneFrameProps} */
+	let { aspect, image, isSecondary } = $props();
 </script>
 
 <article><Frame {aspect} {image} {isSecondary} /></article>

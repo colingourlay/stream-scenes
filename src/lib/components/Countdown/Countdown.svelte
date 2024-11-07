@@ -1,16 +1,25 @@
-<script>
+<script module>
 	import { onMount } from 'svelte';
 	import { hoursMinutesSeconds } from '$lib/utils/time';
 
-	export let timeMS = 0;
-	export let isFinished = false;
-	export let isInline = false;
+	/**
+	 * @typedef {Object} CountdownProps
+	 * @property {number} [timeMS]
+	 * @property {boolean} [isFinished]
+	 * @property {boolean} [isInline]
+	 */
+</script>
 
-	/** @type {number} */
-	let msRemaining;
+<script>
+	/** @type {CountdownProps} */
+	let { timeMS = 0, isFinished = $bindable(false), isInline = false } = $props();
 
-	$: timeRemaining = hoursMinutesSeconds(msRemaining, true);
-	$: isFinished = msRemaining === 0;
+	let msRemaining = $state(0);
+	let timeRemaining = $derived(hoursMinutesSeconds(msRemaining, true));
+
+	$effect(() => {
+		isFinished = msRemaining === 0;
+	});
 
 	const update = () => (msRemaining = Math.max(0, timeMS - Date.now()));
 

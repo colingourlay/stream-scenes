@@ -1,34 +1,28 @@
-<script>
+<script module>
 	import { onMount } from 'svelte';
 	import Menu from '../Menu/Menu.svelte';
 	import { getChannel } from './ably';
 
+	/** @typedef {import('ably').Types.RealtimeChannelPromise} RealtimeChannelPromise */
+</script>
+
+<script>
+	/** @type {SpeechRecognition | undefined} */
+	let recognition = $state();
+	/** @type {boolean} */
+	let isRecognitionActive = $state(false);
+	/** @type {string | null} */
+	let lastError = null;
+	/** @type {RealtimeChannelPromise} */
+	let channel;
 	/**
 	 * @typedef MenuItem
 	 * @prop {string} label
 	 * @prop {() => void} handler
 	 * @prop {boolean} isDisabled
 	 */
-
-	/** @type {SpeechRecognition} */
-	let recognition;
-	/** @type {boolean} */
-	let isRecognitionActive;
-	/** @type {string | null} */
-	let lastError = null;
-	/** @type {import('ably').Types.RealtimeChannelPromise} */
-	let channel;
 	/** @type {MenuItem[]} */
-	let items;
-
-	/**
-	 *
-	 * @param {string} type
-	 * @param {string} payload
-	 */
-	const pub = (type, payload = '') => channel && channel.publish(type, payload);
-
-	$: items = [
+	let items = $derived([
 		{
 			label: 'Start',
 			handler: () => recognition && recognition.start(),
@@ -44,7 +38,14 @@
 			handler: () => pub('reset'),
 			isDisabled: !isRecognitionActive
 		}
-	];
+	]);
+
+	/**
+	 *
+	 * @param {string} type
+	 * @param {string} payload
+	 */
+	const pub = (type, payload = '') => channel && channel.publish(type, payload);
 
 	onMount(async () => {
 		if ('webkitSpeechRecognition' in window) {
@@ -62,7 +63,7 @@
 				isRecognitionActive = false;
 
 				if (lastError !== 'aborted') {
-					recognition.start();
+					recognition && recognition.start();
 				}
 			};
 			recognition.onresult = ({ results, resultIndex }) => {
@@ -82,7 +83,7 @@
 	<Menu>
 		{#each items as { label, handler, isDisabled } (label)}
 			<li>
-				<button on:click={handler} disabled={isDisabled}>
+				<button onclick={handler} disabled={isDisabled}>
 					{label}
 				</button>
 			</li>

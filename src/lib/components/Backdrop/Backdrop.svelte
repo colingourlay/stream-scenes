@@ -1,14 +1,25 @@
-<script>
-	/** @type {string | undefined} */
-	export let image = undefined;
-	export let isSecondary = false;
+<script module>
+	/** @typedef {import('svelte').Snippet} Snippet */
 
-	$: color =
-		image !== undefined ? 'transparent' : `var(--color-${isSecondary ? 'secondary' : 'primary'})`;
+	/**
+	 * @typedef {Object} BackdropProps
+	 * @property {string} [image]
+	 * @property {boolean} [isSecondary]
+	 * @property {Snippet} [children]
+	 */
+</script>
+
+<script>
+	/** @type {BackdropProps} */
+	let { image, isSecondary = false, children } = $props();
+
+	let color = $derived(
+		image !== undefined ? 'transparent' : `var(--color-${isSecondary ? 'secondary' : 'primary'})`
+	);
 </script>
 
 <div style={`--backdrop-color: ${color}; --backdrop-image: ${image ?? 'none'};`}>
-	<slot />
+	{@render children?.()}
 </div>
 
 <style>

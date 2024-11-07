@@ -1,22 +1,25 @@
-<script>
-	import { browser } from '$app/environment';
+<script module>
 	import { page } from '$app/stores';
 	import preset from '$lib/stores/preset';
 	import { PRESETS_IMAGES } from '$lib/utils/preset';
 	import FrameAndSidebar from '$lib/components/FrameAndSidebar/FrameAndSidebar.svelte';
 
-	/** @type {number | undefined} */
-	let aspect;
-	/** @type {string | undefined} */
-	let image;
-	/** @type {boolean} */
-	let isSecondary;
-	/** @type {boolean} */
-	let isFrameSecondary;
-	/** @type {boolean} */
-	let isSidebarSecondary;
+	/** @typedef {import('$lib/components/FrameAndSidebar/FrameAndSidebar.svelte').FrameAndSidebarProps} FrameAndSidebarProps */
+</script>
 
-	$: if (browser) {
+<script>
+	/** @type {FrameAndSidebarProps["aspect"]} */
+	let aspect = $state();
+	/** @type {FrameAndSidebarProps["image"]} */
+	let image = $state();
+	/** @type {FrameAndSidebarProps["isSecondary"]} */
+	let isSecondary = $state();
+	/** @type {FrameAndSidebarProps["isFrameSecondary"]} */
+	let isFrameSecondary = $state();
+	/** @type {FrameAndSidebarProps["isSidebarSecondary"]} */
+	let isSidebarSecondary = $state();
+
+	$effect.pre(() => {
 		aspect = Number($page.url.searchParams.get('aspect')) || undefined;
 		image =
 			$page.url.searchParams.get('image') ??
@@ -24,7 +27,7 @@
 		isSecondary = $page.url.searchParams.has('secondary');
 		isFrameSecondary = $page.url.searchParams.has('frame-secondary');
 		isSidebarSecondary = $page.url.searchParams.has('sidebar-secondary');
-	}
+	});
 </script>
 
 <FrameAndSidebar {aspect} {image} {isSecondary} {isFrameSecondary} {isSidebarSecondary} />

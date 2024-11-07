@@ -1,17 +1,30 @@
-<script>
+<script module>
 	import { resize } from 'svelte-resize-observer-action';
 	import { getMaskURL } from './utils';
 
-	export let thicknessVW = 0.5;
-	export let isCircle = false;
-	export let aspect = isCircle ? 1 : 16 / 9;
-	/** @type {string | undefined} */
-	export let image = undefined;
-	export let isSecondary = false;
+	/**
+	 * @typedef {Object} FrameProps
+	 * @property {number} [thicknessVW]
+	 * @property {boolean} [isCircle]
+	 * @property {number} [aspect]
+	 * @property {string} [image]
+	 * @property {boolean} [isSecondary]
+	 */
+</script>
 
-	let thicknessPx = 0;
-	let contentRadiusPx = 0;
-	let maskURL = '';
+<script>
+	/** @type {FrameProps} */
+	let {
+		thicknessVW = 0.5,
+		isCircle = false,
+		aspect = isCircle ? 1 : 16 / 9,
+		image,
+		isSecondary = false
+	} = $props();
+
+	let thicknessPx = $state(0);
+	let contentRadiusPx = $state(0);
+	let maskURL = $state('');
 
 	// TODO: When updating to Svelte 5, remove `use:resize` in favour of `bind:clientWidth` &
 	// `bind:clientHeight` which will use `ResizeObserver` instead of an `iframe` ruler.
@@ -24,7 +37,7 @@
 		maskURL = getMaskURL(thicknessPx, inlineSize, blockSize, contentRadiusPx);
 	};
 
-	$: color = `var(--color-${isSecondary ? 'secondary' : 'primary'})`;
+	let color = $derived(`var(--color-${isSecondary ? 'secondary' : 'primary'})`);
 </script>
 
 <figure
@@ -37,7 +50,7 @@
 		--temp-frame-color: ${color};
 		--temp-frame-radius: ${contentRadiusPx + thicknessPx}px;
 	`}
-/>
+></figure>
 
 <style>
 	figure {

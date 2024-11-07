@@ -1,6 +1,13 @@
+<script module>
+	/**
+	 * @typedef {Object} StatusProps
+	 * @property {string} chars
+	 */
+</script>
+
 <script>
-	/** @type {string} */
-	export let chars;
+	/** @type {StatusProps} */
+	let { chars } = $props();
 </script>
 
 <p class:long={chars.length >= 10}>

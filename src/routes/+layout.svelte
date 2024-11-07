@@ -1,17 +1,29 @@
-<script>
+<script module>
 	import { browser } from '$app/environment';
-	import EnvironmentStyles from '$lib/components/EnvironmentStyles/EnvironmentStyles.svelte';
 	import { install as installOBS } from '$lib/utils/obs';
+	import EnvironmentStyles from '$lib/components/EnvironmentStyles/EnvironmentStyles.svelte';
 	import './styles.css';
+
+	/** @typedef {import('svelte').Snippet} Snippet */
+
+	/**
+	 * @typedef {Object} LayoutProps
+	 * @property {Snippet} [children]
+	 */
 
 	if (browser) {
 		installOBS();
 	}
 </script>
 
+<script>
+	/** @type {LayoutProps} */
+	let { children } = $props();
+</script>
+
 <EnvironmentStyles>
 	<main>
-		<slot />
+		{@render children?.()}
 	</main>
 </EnvironmentStyles>
 

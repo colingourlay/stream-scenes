@@ -1,14 +1,17 @@
-<script>
-	import { browser } from '$app/environment';
+<script module>
 	import { page } from '$app/stores';
 	import Status from '$lib/components/Status/Status.svelte';
 
-	/** @type {string} */
-	let chars = '';
+	/** @typedef {import('$lib/components/Status/Status.svelte').StatusProps} StatusProps */
+</script>
 
-	$: if (browser) {
+<script>
+	/** @type {StatusProps["chars"]} */
+	let chars = $state('');
+
+	$effect.pre(() => {
 		chars = $page.url.searchParams.get('chars') ?? '-----';
-	}
+	});
 </script>
 
 <article>

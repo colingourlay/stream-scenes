@@ -1,13 +1,17 @@
-<script>
-	import { browser } from '$app/environment';
+<script module>
 	import { page } from '$app/stores';
 	import Transcript from '$lib/components/Transcription/Transcript.svelte';
 
-	let showInterimLine = false;
+	/** @typedef {import('$lib/components/Transcription/Transcript.svelte').TranscriptProps} TranscriptProps */
+</script>
 
-	$: if (browser) {
+<script>
+	/** @type TranscriptProps["showInterimLine"] */
+	let showInterimLine = $state();
+
+	$effect.pre(() => {
 		showInterimLine = $page.url.searchParams.has('secondary');
-	}
+	});
 </script>
 
 <Transcript {showInterimLine} />

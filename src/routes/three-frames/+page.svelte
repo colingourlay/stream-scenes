@@ -1,24 +1,27 @@
-<script>
-	import { browser } from '$app/environment';
+<script module>
 	import { page } from '$app/stores';
 	import preset from '$lib/stores/preset';
 	import { PRESETS_IMAGES } from '$lib/utils/preset';
 	import ThreeFrames from '$lib/components/ThreeFrames/ThreeFrames.svelte';
 
-	/** @type {number | undefined} */
-	let aspect;
-	/** @type {string | undefined} */
-	let image;
-	/** @type {boolean} */
-	let isSecondary;
-	/** @type {boolean} */
-	let isFirstSecondary;
-	/** @type {boolean} */
-	let isSecondSecondary;
-	/** @type {boolean} */
-	let isThirdSecondary;
+	/** @typedef {import('$lib/components/ThreeFrames/ThreeFrames.svelte').ThreeFramesProps} ThreeFramesProps */
+</script>
 
-	$: if (browser) {
+<script>
+	/** @type {ThreeFramesProps["aspect"]} */
+	let aspect = $state();
+	/** @type {ThreeFramesProps["image"]} */
+	let image = $state();
+	/** @type {ThreeFramesProps["isSecondary"]} */
+	let isSecondary = $state();
+	/** @type {ThreeFramesProps["isFirstSecondary"]} */
+	let isFirstSecondary = $state();
+	/** @type {ThreeFramesProps["isSecondSecondary"]} */
+	let isSecondSecondary = $state();
+	/** @type {ThreeFramesProps["isThirdSecondary"]} */
+	let isThirdSecondary = $state();
+
+	$effect.pre(() => {
 		aspect = Number($page.url.searchParams.get('aspect')) || undefined;
 		image =
 			$page.url.searchParams.get('image') ??
@@ -27,7 +30,7 @@
 		isFirstSecondary = $page.url.searchParams.has('first-secondary');
 		isSecondSecondary = $page.url.searchParams.has('second-secondary');
 		isThirdSecondary = $page.url.searchParams.has('third-secondary');
-	}
+	});
 </script>
 
 <ThreeFrames

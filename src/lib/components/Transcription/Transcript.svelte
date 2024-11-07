@@ -1,9 +1,19 @@
-<script>
+<script module>
 	import { onDestroy, onMount } from 'svelte';
 	import { getChannel } from './ably';
 
-	export let numVisibleLines = 2;
-	export let showInterimLine = false;
+	/** @typedef {import('ably').Types.RealtimeChannelPromise} RealtimeChannelPromise */
+
+	/**
+	 * @typedef {Object} TranscriptProps
+	 * @property {number} [numVisibleLines]
+	 * @property {boolean} [showInterimLine]
+	 */
+</script>
+
+<script>
+	/** @type {TranscriptProps} */
+	let { numVisibleLines = 2, showInterimLine = false } = $props();
 
 	/**
 	 * @typedef Line
@@ -12,16 +22,17 @@
 	 */
 
 	/** @type {Line[]} */
-	let recentLines = [];
+	let recentLines = $state([]);
 	/** @type {Line | null} */
-	let interimLine = null;
-	/** @type {import('ably').Types.RealtimeChannelPromise} */
+	let interimLine = $state(null);
+	/** @type {RealtimeChannelPromise} */
 	let channel;
-	/** @type {NodeJS.Timer} */
+	/** @type {NodeJS.Timeout | undefined} */
 	let cleanupTimer;
 
-	$: visibleLines =
-		showInterimLine && interimLine ? [...recentLines.slice(-1), interimLine] : recentLines;
+	let visibleLines = $derived(
+		showInterimLine && interimLine ? [...recentLines.slice(-1), interimLine] : recentLines
+	);
 
 	onMount(async () => {
 		channel = await getChannel();

@@ -1,4 +1,4 @@
-<script>
+<script module>
 	import countdown from '$lib/stores/countdown';
 	import Backdrop from '$lib/components/Backdrop/Backdrop.svelte';
 	import Countdown from '$lib/components/Countdown/Countdown.svelte';

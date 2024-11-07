@@ -1,9 +1,13 @@
-<script>
+<script module>
 	import Countdown from '$lib/components/Countdown/Countdown.svelte';
 	import countdown from '$lib/stores/countdown';
 
-	/** @type {boolean} */
-	let isFinished = false;
+	/** @typedef {import('$lib/components/Countdown/Countdown.svelte').CountdownProps} CountdownProps */
+</script>
+
+<script>
+	/** @type {CountdownProps["isFinished"]} isFinished */
+	let isFinished = $state(false);
 </script>
 
 <article class:finished={isFinished}>
@@ -14,7 +18,9 @@
 
 <style>
 	article {
-		transition: opacity 1.5s 0.25s, transform 2s ease-in-out;
+		transition:
+			opacity 1.5s 0.25s,
+			transform 2s ease-in-out;
 	}
 
 	.finished {
