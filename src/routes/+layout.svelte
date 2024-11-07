@@ -1,7 +1,7 @@
 <script module>
 	import { browser } from '$app/environment';
-	import { install as installOBS } from '$lib/utils/obs';
 	import EnvironmentStyles from '$lib/components/EnvironmentStyles/EnvironmentStyles.svelte';
+	import { install as installOBS } from '$lib/utils/obs';
 	import './styles.css';
 
 	/** @typedef {import('svelte').Snippet} Snippet */
