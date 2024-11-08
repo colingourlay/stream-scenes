@@ -2,10 +2,13 @@
 	import { page } from '$app/stores';
 	import Countdown from '$lib/components/Countdown/Countdown.svelte';
 	import Status from '$lib/components/Status/Status.svelte';
+	import StatusInstructions from '$lib/components/Status/StatusInstructions.svelte';
 	import countdown from '$lib/stores/countdown';
 
 	/** @typedef {import('$lib/components/Countdown/Countdown.svelte').CountdownProps} CountdownProps */
 	/** @typedef {import('$lib/components/Status/Status.svelte').StatusProps} StatusProps */
+
+	const PLACEHOLDER_CHARS = '-----';
 </script>
 
 <script>
@@ -15,7 +18,7 @@
 	let chars = $state('');
 
 	$effect.pre(() => {
-		chars = $page.url.searchParams.get('chars') ?? '-----';
+		chars = $page.url.searchParams.get('chars') ?? PLACEHOLDER_CHARS;
 	});
 </script>
 
@@ -28,6 +31,9 @@
 	<section>
 		<Status {chars} />
 	</section>
+	{#if chars === PLACEHOLDER_CHARS}
+		<StatusInstructions />
+	{/if}
 </article>
 
 <style>
