@@ -4,6 +4,7 @@ Web based elements for my OBS streaming setup
 
 - Browser sources to layer into scenes
 - Controls for running countdown timers & switching themes
+- Transcription recording & display
 
 ## Getting started
 
